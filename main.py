@@ -1,17 +1,5 @@
 from fastapi import FastAPI
 import sqlite3
-from typing import List
-from pydantic import BaseModel
-
-#BASE MODELS
-class Part(BaseModel):
-    category: str
-    sub_category: str | None = None
-    name: str
-    value: str | None = None
-    count: int
-    min_count: int | None = None
-
 app = FastAPI()
 
 #LIST ALL PARTS
