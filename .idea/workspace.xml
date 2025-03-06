@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Pridanie Hoppscotch configu" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Pridanie Hoppscotch configu">
+      <change afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -174,7 +177,7 @@
       <workItem from="1741116515005" duration="9295000" />
       <workItem from="1741156915730" duration="5229000" />
       <workItem from="1741171657605" duration="7443000" />
-      <workItem from="1741290284980" duration="10289000" />
+      <workItem from="1741290284980" duration="10397000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -240,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741300352546</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Pridanie Hoppscotch configu">
+      <option name="closed" value="true" />
+      <created>1741301071488</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1741301071488</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
