@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="pridanie README.md a základných API endpoints">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/db/test.db" afterDir="false" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Zjednodušenie kódu, pridanie TODOs, pridanie borrow.">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +176,7 @@
       <workItem from="1741116515005" duration="9295000" />
       <workItem from="1741156915730" duration="5229000" />
       <workItem from="1741171657605" duration="7443000" />
-      <workItem from="1741290284980" duration="9412000" />
+      <workItem from="1741290284980" duration="9467000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -221,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741293274496</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Zjednodušenie kódu, pridanie TODOs, pridanie borrow.">
+      <option name="closed" value="true" />
+      <created>1741300118744</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741300118744</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +236,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="initial" />
     <MESSAGE value="pridanie README.md a základných API endpoints" />
-    <option name="LAST_COMMIT_MESSAGE" value="pridanie README.md a základných API endpoints" />
+    <MESSAGE value="Zjednodušenie kódu, pridanie TODOs, pridanie borrow." />
+    <option name="LAST_COMMIT_MESSAGE" value="Zjednodušenie kódu, pridanie TODOs, pridanie borrow." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FastAPIProject$admin_db.coverage" NAME="admin_db Coverage Results" MODIFIED="1741291504763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />

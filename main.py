@@ -65,6 +65,7 @@ async def parts_update_by_id(part_id:int, parameters: dict):
     return construct_part(parts_update_by_id(part_id, parameters))
 
 #BORROW PARTS
+#TODO !DO NOT USE!
 @app.post("/parts/borrow/{part_ids}/{counts}")
 async def parts_update(part_ids: str, counts: str):
     from admin_db import parts_borrow
