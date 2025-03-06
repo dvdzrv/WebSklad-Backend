@@ -1,3 +1,11 @@
+# Prečítať hoppschotch/README.md DIKI
+
+
+
+
+
+
+
 # LISTING
 
 LIST ALL PARTS: "/parts/list"

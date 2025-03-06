@@ -1,0 +1,1 @@
+Hoppscotch je alternatíva softwaru Postman, slúži na testovanie apis. Pls stiahnuť a naštudovať, config s hotovimi tesmi priložený. Diki
