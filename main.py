@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 import sqlite3
+
+
 from admin_db import construct_part, construct_part_list
 app = FastAPI()
 
@@ -64,13 +66,39 @@ async def parts_update_by_id(part_id:int, parameters: dict):
     from admin_db import parts_update_by_id
     return construct_part(parts_update_by_id(part_id, parameters))
 
+#LIST BORROWED PARTS
+@app.get("/parts/borrowed/list")
+async def parts_borrowed_list():
+    from admin_db import parts_borrowed_list
+    return construct_part_list(parts_borrowed_list())
+
+#LIST BORROWED PARTS BY IDS
+@app.get("/parts/borrowed/list/{part_ids}")
+async def parts_borrowed_list_by_ids(part_ids: str):
+    from admin_db import parts_borrowed_list_by_ids
+    return construct_part_list(parts_borrowed_list_by_ids(part_ids))
+
+#TODO make sure parts are deleted properly, Error checking
+#DELETE BORROWED PARTS BY IDS
+@app.delete("/parts/borrowed/delete/{part_ids}")
+async def parts_borrowed_delete_by_ids(part_ids: str):
+    from admin_db import parts_borrowed_delete_by_ids
+    return parts_borrowed_delete_by_ids(part_ids)
+
+
 #BORROW PARTS
-#TODO !DO NOT USE!
+#TODO in admin_db, works, but doesn't check min count
 @app.post("/parts/borrow/{part_ids}/{counts}")
-async def parts_update(part_ids: str, counts: str):
+async def parts_update(part_ids: str, counts: str, response: Response):
     from admin_db import parts_borrow
-    return parts_borrow(part_ids, counts)
+    try:
+        response.status_code = status.HTTP_200_OK
+        return parts_borrow(part_ids, counts)
+    except Exception as e:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"message": str(e)}
 
 #TODO List and delete borrowed
 #TODO History
 #TODO Users
+#TODO LIMITED COUNT/MIN COUNT

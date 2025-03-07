@@ -1,4 +1,5 @@
 import sqlite3
+from types import NoneType
 
 
 def query_db(query: str):
@@ -231,74 +232,101 @@ def parts_update_by_id(part_id:int, parameters: dict):
     return query_db(f"""SELECT * FROM parts WHERE part_id = {part_id}""")[0]
 
 
+#LIST BORROWED PARTS
+def parts_borrowed_list():
+    return query_db(
+        """SELECT * FROM borrowed"""
+    )
+
+
+#LIST BORROWED PARTS BY IDS
+def parts_borrowed_list_by_ids(part_ids: str):
+    part_ids = part_ids.split(',')
+    part_ids = [int(id) for id in part_ids]
+
+    part_ids_str = ""
+    for i in range(len(part_ids)):
+        part_ids_str += f"{part_ids[i]},"
+
+    part_ids_str = part_ids_str[:-1]
+
+    return query_db(
+        f"""SELECT * FROM borrowed WHERE borrowed_id IN ({part_ids_str})"""
+    )
+
+#DELETE BORROWED PARTS BY IDS
+def parts_borrowed_delete_by_ids(part_ids: str):
+    part_ids = part_ids.split(',')
+    part_ids = [int(id) for id in part_ids]
+
+    part_ids_str = ""
+    for i in range(len(part_ids)):
+        part_ids_str += f"{part_ids[i]},"
+    part_ids_str = part_ids_str[:-1]
+
+    query_db(f"""DELETE FROM borrowed WHERE borrowed_id IN ({part_ids_str})""")
+
+    return {"message": f"Borrowed parts {part_ids} deleted."}
+
+
+
+
+
+
 
 
 
 
 #BORROW PARTS
 def parts_borrow(part_ids:str, counts:str):
-    #GET REQUESTED PARTS FROM PARTS TABLE
-    parts_from_db = parts_list_by_ids(part_ids)
-
-    print(parts_from_db, part_ids, counts)
-    return f"{parts_from_db}, {part_ids}, {counts}"
-
-#TODO
-
-    #TURN IDS AND COUNTS FROM STRS INTO LISTS OF INTS
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
 
     counts = counts.split(',')
-    counts = [int(count) for count in counts]
+    counts = [int(id) for id in counts]
 
-    #CHECK IF ALL PARTS FOUND
-    if len(part_ids) != len(part_ids):
-        return {"message": f"One or more parts not found."}
-
-    #CHECK IF NUMBER OF PART IDS AND PART COUNT MATCH
+    #CHECK IF NUMBER OF PART IDS AND PART COUNTS MATCH
     if len(part_ids) != len(counts):
-        return {
-            "message": "Length of IDS and COUNTS do not match.",
-        }
+        raise Exception("Length of IDS and COUNTS do not match.")
 
-    #CHECK IF THERE IS ENOUGH PARTS
+
     for i in range(len(part_ids)):
-        if parts_from_db[i]["count"] - counts[i] < 0:
-            return {
-                "message": f"There is less of part: {part_ids[i]} than requested count: {counts[i]}.",
-                    "current_count": parts_from_db[i]["count"],
-            }
+        part = parts_list_by_id(part_ids[i])
 
-    #CHECK IF THE REQUESTED COUNT OF PARTS WON'T LEAVE FEWER PARTS THAN MIN COUNT
-    for i in range(len(part_ids)):
-        if parts_from_db[i]["count"] - counts[i] < parts_from_db[i]["min_count"]:
-            return {
-                "message": f"There is not enough of part: {part_ids[i]} than requested count: {counts[i]}. Limited by min count: {parts_from_db[i]['min_count']}.",
-                "current_count": parts_from_db[i]["count"],
-            }
+        #CHECK IF PART IS FOUND
+        if part == []:
+            raise Exception(f"Part {part_ids[i]} not found.")
 
-    # SET PART COUNTS IN PARTS TABLE
-    for i in range(len(part_ids)):
-        parts_update_by_id(part_ids[i], {"count": parts_from_db[i]["count"] - counts[i]})
+        part = construct_part(part)
 
-    query_str = ""
-    for i in range(len(part_ids)):
-        query_str += f"NONE, {part_ids[i]}, {counts[i]},"
-    query_str = query_str[:-1]
+        #CHECK IF THERE IS ENOUGH PARTS
+        if part["count"] - counts[i] < 0:
+            raise Exception(f"There is not enough of part: {part_ids[i]}. You requested {counts[i] - part["count"]} more parts.")
 
-    #ADD BORROWED PARTS INTO BORROWED TABLE
-    query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count) VALUES {query_str}""")
+        #CHECK IF BORROWING WON'T LEAVE FEWER PARTS THAN MIN COUNT
+        #TODO FINISH
+        #if type(part["min_count"]) != NoneType:
+        #    if part["count"] - counts[i] < part["min_count"]:
+        #        return {
+        #            "message:" f"Part {part_ids[i]} you requested will be borrowed, but it leaves less parts in storage, than minimal count.",
+        #        }
+
+        #SET PART COUNTS IN PARTS TABLE
+        parts_update_by_id(part_ids[i], {"count": part["count"] - counts[i]})
+
+
+
+        #ADD BORROWED PARTS INTO BORROWED TABLE
+        query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count) VALUES (NULL, {part_ids[i]}, {counts[i]})""")
+
+
 
     #RETURN BORROWED PARTS
-    return query_db(f"""SELECT part_id, count FROM borrowed WHERE part_id IN ({part_ids})""")
-
-
-
-
-
-
-
+    str = ""
+    for part in part_ids:
+        str += f"{part},"
+    str = str[:-1]
+    return query_db(f"""SELECT part_id, count FROM borrowed WHERE part_id IN ({str})""")
 
 
 
