@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Opravenie borrowing">
-      <change afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/edbd81f3-8875-4778-8171-11a08928be63.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/edbd81f3-8875-4778-8171-11a08928be63.xml" afterDir="false" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Pridanie auth">
+      <change afterPath="$PROJECT_DIR$/init.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/test.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hoppscotch/Sklad.json" beforeDir="false" afterPath="$PROJECT_DIR$/hoppscotch/Sklad.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +210,7 @@
       <workItem from="1741171657605" duration="7443000" />
       <workItem from="1741290284980" duration="10416000" />
       <workItem from="1741366594610" duration="13548000" />
-      <workItem from="1741463195926" duration="5675000" />
+      <workItem from="1741463195926" duration="6907000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -307,7 +300,23 @@
       <option name="project" value="LOCAL" />
       <updated>1741381994822</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Pridanie auth">
+      <option name="closed" value="true" />
+      <created>1741470415681</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1741470415681</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Pridanie auth">
+      <option name="closed" value="true" />
+      <created>1741470422153</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1741470422153</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +331,8 @@
     <MESSAGE value="Pridanie Hoppscotch configu" />
     <MESSAGE value="pridanie todo" />
     <MESSAGE value="Opravenie borrowing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Opravenie borrowing" />
+    <MESSAGE value="Pridanie auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pridanie auth" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FastAPIProject$auth.coverage" NAME="auth Coverage Results" MODIFIED="1741466939354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
