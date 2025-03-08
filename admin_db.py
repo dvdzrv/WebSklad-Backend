@@ -30,6 +30,27 @@ def construct_part_list(rows):
         parts.append(construct_part(row))
     return parts
 
+def construct_borrowed_part(row):
+    return {
+        "borrowed_id": row[0],
+        "part_id": row[1],
+        "count": row[2],
+    }
+
+def construct_borrowed_part_list(rows):
+    parts = []
+    for row in rows:
+        parts.append(construct_borrowed_part(row))
+    return parts
+
+
+
+
+
+
+
+
+
 
 
 
@@ -54,17 +75,20 @@ def init_db():
     )
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS users (user_id integer PRIMARY KEY, username text NOT NULL, rights text NOT NULL);"""
+        """CREATE TABLE IF NOT EXISTS users (user_id integer PRIMARY KEY, username text NOT NULL, hashed_pass text NOT NULL, rights text NOT NULL);"""
     )
 
     db_cursor.execute(
-        """INSERT INTO users (user_id, username, rights) VALUES (NULL, "admin", "all");"""
+        """INSERT INTO users (user_id, username, hashed_pass, rights) VALUES (NULL, "admin", "27c243824cf515818c905231c215ae7ce8282240b29752f816c22548768c1c53", "all");"""
     )
 
     db_cursor.execute(
         """CREATE TABLE IF NOT EXISTS history (history_id integer PRIMARY KEY, user_id integer NOT NULL, operation text NOT NULL, time timestamp DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(user_id) REFERENCES users(user_id));"""
     )
 
+    db_cursor.execute(
+        """CREATE TABLE IF NOT EXISTS logon_users (logon_id integer PRIMARY KEY, user_id integer, token text NOT NULL, generated_time timestamp DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (user_id) REFERENCES users (user_id));"""
+    )
 
     db_con.commit()
 
@@ -329,10 +353,42 @@ def parts_borrow(part_ids:str, counts:str):
     return query_db(f"""SELECT part_id, count FROM borrowed WHERE part_id IN ({str})""")
 
 
+#RETURN PART
+def parts_return(borrowed_ids:str):
+    borrowed_ids = borrowed_ids.split(',')
+    borrowed_ids = [int(id) for id in borrowed_ids]
+
+    for i in range(len(borrowed_ids)):
+        try:
+            borrowed_part = construct_borrowed_part(
+                parts_borrowed_list_by_ids(
+                    str(borrowed_ids[i]))[0])
+        except IndexError:
+            raise Exception(f"Part {borrowed_ids[i]} not found. Parts before this returned!")
+
+        part = construct_part(
+            parts_list_by_id(
+                construct_borrowed_part(
+                    parts_borrowed_list_by_ids(
+                        str(borrowed_ids[i])
+                    )[0]
+                )["part_id"]
+            )
+        )
 
 
 
+        if part == [] or borrowed_part == []:
+            raise Exception({
+                "message": "Part {borrowed_ids[i]} not found. Parts before this returned successfully.",
+                "returned_parts": borrowed_ids[:i],
+                "part_not_found": borrowed_ids[i],
+                "parts_not_returned": borrowed_ids[i:],
+            })
 
+        parts_update_by_id(part["part_id"], {"count": part["count"] + borrowed_part["count"]})
+
+        parts_borrowed_delete_by_ids(str(borrowed_ids[i]))
 
 
 

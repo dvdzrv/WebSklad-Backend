@@ -1,8 +1,10 @@
+from urllib import response
+
 from fastapi import FastAPI, Response, status
 import sqlite3
 
 
-from admin_db import construct_part, construct_part_list
+from admin_db import construct_part, construct_part_list, construct_borrowed_part, construct_borrowed_part_list
 app = FastAPI()
 
 #LIST ALL PARTS
@@ -56,8 +58,7 @@ async def parts_create(part: dict):
 @app.delete("/parts/delete/{part_ids}")
 async def parts_delete_by_ids(part_ids: str):
     from admin_db import parts_delete_by_ids
-    rows = parts_delete_by_ids(part_ids)
-    return rows
+    return parts_delete_by_ids(part_ids)
 
 #UPDATE PART
 #TODO Update multiple parts, Error checking
@@ -66,17 +67,21 @@ async def parts_update_by_id(part_id:int, parameters: dict):
     from admin_db import parts_update_by_id
     return construct_part(parts_update_by_id(part_id, parameters))
 
+
+
+
+
 #LIST BORROWED PARTS
 @app.get("/parts/borrowed/list")
 async def parts_borrowed_list():
     from admin_db import parts_borrowed_list
-    return construct_part_list(parts_borrowed_list())
+    return construct_borrowed_part_list(parts_borrowed_list())
 
 #LIST BORROWED PARTS BY IDS
 @app.get("/parts/borrowed/list/{part_ids}")
 async def parts_borrowed_list_by_ids(part_ids: str):
     from admin_db import parts_borrowed_list_by_ids
-    return construct_part_list(parts_borrowed_list_by_ids(part_ids))
+    return construct_borrowed_part_list(parts_borrowed_list_by_ids(part_ids))
 
 #TODO make sure parts are deleted properly, Error checking
 #DELETE BORROWED PARTS BY IDS
@@ -97,6 +102,35 @@ async def parts_update(part_ids: str, counts: str, response: Response):
     except Exception as e:
         response.status_code = status.HTTP_400_BAD_REQUEST
         return {"message": str(e)}
+
+#RETURN PARTS
+@app.post("/parts/return/{borrowed_ids}")
+async def parts_return_by_id(borrowed_ids: str):
+    from admin_db import parts_return
+    try:
+        parts_return(borrowed_ids)
+    except Exception as e:
+        response.status_code = status.HTTP_400_BAD_REQUEST
+        return {"message": str(e)}
+    else:
+        return {
+            "message": f"Successfuly returned parts {borrowed_ids}.",
+        }
+
+@app.post("/login")
+async def login_user(login: dict):
+    from auth import login_user
+    return login_user(login)
+
+
+
+
+
+
+
+
+
+
 
 #TODO List and delete borrowed
 #TODO History
