@@ -4,7 +4,7 @@ from fastapi import FastAPI, Response, status, Header
 
 from auth import authenticate_user
 from admin_db import construct_part, construct_part_list, construct_borrowed_part, construct_borrowed_part_list
-
+from history import history_add_operation
 
 
 rights = ["all", "user", None]
@@ -65,8 +65,10 @@ async def parts_create(part: dict, response: Response, token: Annotated[str | No
     from admin_db import parts_create
     rights = "all"
     if authenticate_user(token, rights):
+        history_add_operation(token, f"User created part {part["name"] + " " + part["value"]}.")
         return construct_part(parts_create(part))
     else:
+        history_add_operation(token, f"User failed to create part {part["name"] + part["value"]}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to create parts.",
@@ -80,8 +82,10 @@ async def parts_delete_by_ids(part_ids: str, response: Response, token: Annotate
     from admin_db import parts_delete_by_ids
     rights = "all"
     if authenticate_user(token, rights):
+        history_add_operation(token, f"User deleted parts {part_ids}.")
         return parts_delete_by_ids(part_ids)
     else:
+        history_add_operation(token, f"User failed to delete parts {part_ids}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to delete parts.",
@@ -94,8 +98,10 @@ async def parts_update_by_id(part_id:int, parameters: dict, response: Response, 
     from admin_db import parts_update_by_id
     rights = "all"
     if authenticate_user(token, rights):
+        history_add_operation(token, f"User updated part {part_id}.")
         return construct_part(parts_update_by_id(part_id, parameters))
     else:
+        history_add_operation(token, f"User failed to update part {part_id}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to update parts.",
@@ -121,13 +127,15 @@ async def parts_borrowed_list_by_ids(part_ids: str):
 ##BORROWED PART HANDLING
 ###Delete borrowed parts by IDS
 #TODO make sure parts are deleted properly, Error checking
-@app.delete("/parts/borrowed/delete/{part_ids}")
-async def parts_borrowed_delete_by_ids(part_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
+@app.delete("/parts/borrowed/delete/{borrowed_ids}")
+async def parts_borrowed_delete_by_ids(borrowed_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_borrowed_delete_by_ids
     rights = "all"
     if authenticate_user(token, rights):
-        return parts_borrowed_delete_by_ids(part_ids)
+        history_add_operation(token, f"User deleted borrowed parts {borrowed_ids}.")
+        return parts_borrowed_delete_by_ids(borrowed_ids)
     else:
+        history_add_operation(token, f"User failed to delete borrowed parts {borrowed_ids}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to delete borrowed parts.",
@@ -142,33 +150,43 @@ async def parts_update(part_ids: str, counts: str, response: Response, token: An
     rights = "user"
     if authenticate_user(token, rights):
         try:
-            response.status_code = status.HTTP_200_OK
-            return parts_borrow(part_ids, counts)
+            parts_borrow(part_ids, counts)
         except Exception as e:
+            history_add_operation(token, f"User failed borrowing parts {part_ids}.")
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message": str(e)}
+        else:
+            history_add_operation(token, f"User borrowed parts {part_ids}.")
+            return {
+                "message": f"Successfully borrowed parts {part_ids}.",
+            }
     else:
+        history_add_operation(token, f"User failed borrowing parts {part_ids}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to borrow parts.",
         }
 
 ###Return borrowed parts
+##TODO ERROR LIST OUT OF RANGE, DELETED PART BUT NOT BORROWED
 @app.post("/parts/return/{borrowed_ids}")
-async def parts_return_by_id(borrowed_ids: str, resonse: Response, token: Annotated[str | None, Header()] = None):
+async def parts_return_by_id(borrowed_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_return
     rights = "user"
     if authenticate_user(token, rights):
         try:
             parts_return(borrowed_ids)
         except Exception as e:
+            history_add_operation(token, f"User failed returning parts {borrowed_ids}.")
             response.status_code = status.HTTP_400_BAD_REQUEST
             return {"message": str(e)}
         else:
+            history_add_operation(token, f"User borrowed parts {borrowed_ids}.")
             return {
-                "message": f"Successfuly returned parts {borrowed_ids}.",
+                "message": f"Successfully returned parts {borrowed_ids}.",
             }
     else:
+        history_add_operation(token, f"User failed returning parts {borrowed_ids}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to return parts.",
@@ -188,6 +206,7 @@ async def login_user(login: dict):
 @app.post("/logout")
 async def logout_user(token: Annotated[str | None, Header()] = None):
     from auth import logout_user
+    history_add_operation(token, "User logged out.")
     return logout_user(token)
 
 
@@ -198,8 +217,10 @@ async def user_create(user: dict, response: Response, token: Annotated[str | Non
     from auth import create_user
     rights = "all"
     if authenticate_user(token, rights):
+        history_add_operation(token, f"User created user {user["username"]}.")
         return create_user(user["username"], user["password"], user["rights"])
     else:
+        history_add_operation(token, f"User failed to created user {user["username"]}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to create users.",
@@ -211,17 +232,21 @@ async def user_create(user_ids: str, response: Response, token: Annotated[str | 
     from auth import users_delete_by_ids
     rights = "all"
     if authenticate_user(token, rights):
+        history_add_operation(token, f"User deleted users {user_ids}.")
         return users_delete_by_ids(user_ids)
     else:
+        history_add_operation(token, f"User failed to delete users {user_ids}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
         return {
             "message": f"Unauthorized to delete users.",
         }
 
 
+#List history
+@app.get("/history")
+async def history():
+    from history import list_history, construct_history_list
+    return construct_history_list(list_history())
 
-#TODO History
-#TODO Users
 #TODO LIMITED COUNT/MIN COUNT
-#TODO Delete tokens after expiration time
 #TODO ERROR CHECKING

@@ -5,11 +5,12 @@ import datetime
 
 
 
-token_valid_time = datetime.timedelta(minutes=30)
+token_valid_time = datetime.timedelta(minutes=2)
 
 
 
 #USER DICTIONARIES
+#PRIVATE USER DICTIONARIES, UNSAFE!!!!!
 ##Construct user dictionary
 def construct_user(row):
     return {
@@ -19,11 +20,30 @@ def construct_user(row):
         "rights": row[3],
     }
 
+
 ##Construct list of user dictionaries
 def construct_user_list(rows):
     users = []
     for row in rows:
         users.append(construct_user(row))
+    return users
+
+
+#PUBLIC USER DICTIONARIES, SAFE!!!!!
+##Construct public user dictionary
+def construct_public_user(row):
+    return {
+        "user_id": row[0],
+        "username": row[1],
+        "rights": row[2],
+    }
+
+
+##Construct list of public user dictionaries
+def construct_public_user_list(rows):
+    users = []
+    for row in rows:
+        users.append(construct_public_user(row))
     return users
 
 
@@ -38,14 +58,37 @@ def hash_password(password: str) -> str:
 
 #USERS
 ##USER HANDLING
+###List all users
+def list_users():
+    return query_db(
+        f"""SELECT user_id, username, rights FROM users"""
+    )
+
+###List users by IDS
+def list_users_by_ids(user_ids:str):
+    print(user_ids)
+    user_ids = user_ids.split(",")
+    user_ids = [int(user_id) for user_id in user_ids]
+
+    user_ids_str = ""
+    for user_id in user_ids:
+        user_ids_str += f"'{user_id}',"
+    user_ids_str = user_ids_str[:-1]
+
+    return query_db(
+        f"""SELECT user_id, username, rights FROM users WHERE user_id IN ({user_ids_str})"""
+    )
+
 ###Create user
 def create_user(username: str, password: str, rights: str):
     query_db(
         f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES(NULL, {username}, '{hash_password(password)}', '{rights}'));"""
     )
 
-    return query_db(
-        f"""SELECT user_id FROM users WHERE username = '{username}';"""
+    return construct_user(
+        query_db(
+            f"""SELECT user_id, username, rights FROM users WHERE username = '{username}'"""
+        )[0]
     )
 
 ###Delete user
@@ -65,6 +108,16 @@ def users_delete_by_ids(user_ids:str):
 
 
 #USER AUTHENTICATION AND AUTHORIZATION
+
+#GET USER ID FROM TOKEN
+def get_user_id_by_token(token:str):
+    user_id = query_db(
+        f"""SELECT user_id FROM logon_users WHERE token='{token}';"""
+    )[0][0]
+
+    user_id = str(user_id)
+
+    return user_id
 
 #USER AUTHENTICATION
 ##VERIFY IF USER IS LOGGED IN
@@ -98,6 +151,19 @@ def check_token_validation(token: str):
 
 
 #USER AUTHORIZATION
+##GET USER RIGHTS BY TOKEN
+def get_user_rights(token:str):
+    user_id = query_db(
+        f"""SELECT user_id FROM logon_users WHERE token='{token}';"""
+    )[0][0]
+
+    user_rights = query_db(
+        f"""SELECT rights FROM users WHERE user_id='{user_id}';"""
+    )[0][0]
+
+    return user_rights
+
+
 ##VERIFY USER RIGHTS
 def verify_user_rights(token:str, rights: str) -> bool:
     if not verify_logon_user(token) or not check_token_validation(token):
@@ -127,9 +193,12 @@ def delete_expired_tokens():
         f"""SELECT logon_id, generated_time FROM logon_users;"""
     )
 
+    from history import history_add_operation
+
     for token in tokens:
         token_init_time = datetime.datetime.strptime(token[1], "%Y-%m-%d %H:%M:%S")
         if now - token_init_time - datetime.timedelta(hours=1) < token_valid_time:
+            history_add_operation(token, f"Deleted expired token.")
             query_db(
                 f"""DELETE FROM logon_users WHERE logon_id='{token[0]}';"""
             )
@@ -146,7 +215,6 @@ def login_user(login:dict) -> dict:
     if user == []:
         raise Exception("User not found.")
 
-
     user = construct_user(user)
 
     print(hash_password(login["password"]) == user["hashed_pass"])
@@ -159,6 +227,9 @@ def login_user(login:dict) -> dict:
     query_db(
         f"""INSERT INTO logon_users (logon_id, user_id, token) VALUES (NULL, {user["user_id"]}, '{token}');"""
     )
+
+    from history import history_add_operation
+    history_add_operation(token, f"User logged in.")
 
     return {
                 "token": token,
