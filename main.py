@@ -10,7 +10,6 @@ from history import history_add_operation
 rights = ["all", "user", None]
 
 
-
 app = FastAPI()
 
 

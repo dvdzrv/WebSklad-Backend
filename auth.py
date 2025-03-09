@@ -5,7 +5,7 @@ import datetime
 
 
 
-token_valid_time = datetime.timedelta(minutes=2)
+token_valid_time = datetime.timedelta(minutes=30)
 
 
 
@@ -66,7 +66,6 @@ def list_users():
 
 ###List users by IDS
 def list_users_by_ids(user_ids:str):
-    print(user_ids)
     user_ids = user_ids.split(",")
     user_ids = [int(user_id) for user_id in user_ids]
 
@@ -181,6 +180,7 @@ def verify_user_rights(token:str, rights: str) -> bool:
 
 ##AUTHENTICATE AND AUTHORIZE USER
 def authenticate_user(token:str, rights:str):
+    delete_expired_tokens()
     if token == None or rights == "":
         return False
     elif verify_user_rights(token, rights):
@@ -189,6 +189,7 @@ def authenticate_user(token:str, rights:str):
 ##DELETE EXPIRED TOKENS
 def delete_expired_tokens():
     now = datetime.datetime.now()
+
     tokens = query_db(
         f"""SELECT logon_id, generated_time FROM logon_users;"""
     )
@@ -197,12 +198,11 @@ def delete_expired_tokens():
 
     for token in tokens:
         token_init_time = datetime.datetime.strptime(token[1], "%Y-%m-%d %H:%M:%S")
-        if now - token_init_time - datetime.timedelta(hours=1) < token_valid_time:
+        if now - token_init_time - datetime.timedelta(hours=1) > token_valid_time:
             history_add_operation(token, f"Deleted expired token.")
             query_db(
                 f"""DELETE FROM logon_users WHERE logon_id='{token[0]}';"""
             )
-
 
 
 ##USER HANDLING
@@ -217,7 +217,6 @@ def login_user(login:dict) -> dict:
 
     user = construct_user(user)
 
-    print(hash_password(login["password"]) == user["hashed_pass"])
 
     if hash_password(login["password"]) == user["hashed_pass"]:
         token = uuid4().hex
