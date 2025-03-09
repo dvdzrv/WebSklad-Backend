@@ -139,7 +139,7 @@ async def parts_borrowed_delete_by_ids(part_ids: str, response: Response, token:
 @app.post("/parts/borrow/{part_ids}/{counts}")
 async def parts_update(part_ids: str, counts: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_borrow
-    rights = "all"
+    rights = "user"
     if authenticate_user(token, rights):
         try:
             response.status_code = status.HTTP_200_OK
@@ -157,7 +157,7 @@ async def parts_update(part_ids: str, counts: str, response: Response, token: An
 @app.post("/parts/return/{borrowed_ids}")
 async def parts_return_by_id(borrowed_ids: str, resonse: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_return
-    rights = "all"
+    rights = "user"
     if authenticate_user(token, rights):
         try:
             parts_return(borrowed_ids)

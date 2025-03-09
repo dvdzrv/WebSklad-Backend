@@ -389,8 +389,9 @@
         "requests": [
           {
             "v": "11",
-            "endpoint": "http://127.0.0.1:8000/login",
             "name": "Login",
+            "method": "POST",
+            "endpoint": "http://127.0.0.1:8000/login",
             "params": [],
             "headers": [
               {
@@ -400,16 +401,42 @@
                 "description": ""
               }
             ],
-            "method": "POST",
+            "preRequestScript": "",
+            "testScript": "",
             "auth": {
               "authType": "inherit",
               "authActive": true
             },
-            "preRequestScript": "",
-            "testScript": "",
             "body": {
               "contentType": "application/json",
               "body": "{\n  \"username\": \"admin\",\n  \"password\": \"jožo\"\n}"
+            },
+            "requestVariables": [],
+            "responses": {}
+          },
+          {
+            "v": "11",
+            "name": "Logout",
+            "method": "POST",
+            "endpoint": "http://127.0.0.1:8000/logout",
+            "params": [],
+            "headers": [
+              {
+                "key": "token",
+                "value": "eda7f771c41a4dbbab72096623fe135f",
+                "active": true,
+                "description": ""
+              }
+            ],
+            "preRequestScript": "",
+            "testScript": "",
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "body": {
+              "contentType": null,
+              "body": null
             },
             "requestVariables": [],
             "responses": {}
