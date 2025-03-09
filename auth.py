@@ -1,6 +1,11 @@
 from admin_db import query_db
 from uuid import uuid4
 import hashlib
+import datetime
+
+token_valid_time = datetime.timedelta(minutes=30)
+
+
 
 def construct_user(row):
     return {
@@ -10,7 +15,7 @@ def construct_user(row):
         "rights": row[3],
     }
 
-def construck_user_list(rows):
+def construct_user_list(rows):
     users = []
     for row in rows:
         users.append(construct_user(row))
@@ -26,6 +31,9 @@ def hash_password(password: str) -> str:
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     return hashed_password
 
+
+
+
 def create_user(username: str, password: str, rights: str):
     query_db(
         f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES(NULL, {username}, '{hash_password(password)}', '{rights}'));"""
@@ -34,7 +42,6 @@ def create_user(username: str, password: str, rights: str):
     return query_db(
         f"""SELECT user_id FROM users WHERE username = '{username}';"""
     )
-
 
 def users_delete_by_ids(user_ids:str):
     user_ids = user_ids.split(",")
@@ -48,6 +55,79 @@ def users_delete_by_ids(user_ids:str):
     query_db(
         f"""DELETE FROM users WHERE user_id IN ({user_ids_str});"""
     )
+
+
+
+
+
+
+
+
+def verify_logon_user(token: str) -> bool:
+    logon_user = query_db(
+        f"""SELECT * FROM logon_users WHERE token='{token}';"""
+    )
+
+    if logon_user != []:
+        return True
+    else:
+        return False
+
+def check_token_validation(token: str):
+    now = datetime.datetime.now()
+    token_init_time = query_db(
+        f"""SELECT generated_time FROM logon_users WHERE token='{token}';"""
+    )[0][0]
+
+    token_init_time = datetime.datetime.strptime(token_init_time, "%Y-%m-%d %H:%M:%S")
+    if now - token_init_time - datetime.timedelta(hours=1) < token_valid_time:
+        return True
+    else:
+        query_db(
+            f"""DELETE FROM logon_users WHERE token='{token}';"""
+        )
+        return False
+
+def verify_user_rights(token:str, rights: str) -> bool:
+    if not verify_logon_user(token) or not check_token_validation(token):
+        return False
+    else:
+        user_id = query_db(
+            f"""SELECT user_id FROM logon_users WHERE token='{token}';"""
+        )[0][0]
+        rights_from_db = query_db(
+            f"""SELECT rights FROM users WHERE user_id='{user_id}';"""
+        )[0][0]
+        if rights != rights_from_db and rights_from_db != "all":
+            return False
+        else: return True
+
+def authenticate_user(token:str, rights:str):
+    if token == None or rights == "":
+        return False
+    elif verify_user_rights(token, rights):
+        return True
+
+def delete_expired_tokens():
+    now = datetime.datetime.now()
+    tokens = query_db(
+        f"""SELECT logon_id, generated_time FROM logon_users;"""
+    )
+
+    for token in tokens:
+        token_init_time = datetime.datetime.strptime(token[1], "%Y-%m-%d %H:%M:%S")
+        if now - token_init_time - datetime.timedelta(hours=1) < token_valid_time:
+            query_db(
+                f"""DELETE FROM logon_users WHERE logon_id='{token[0]}';"""
+            )
+
+
+
+
+
+
+
+
 
 
 
@@ -71,34 +151,26 @@ def login_user(login:dict) -> dict:
         raise Exception("Wrong password.")
 
     query_db(
-        f"""INSERT INTO logon_users (logon_id, user_id, token, generated_time) VALUES (NULL, {user["user_id"]}, {token}, NULL);"""
+        f"""INSERT INTO logon_users (logon_id, user_id, token) VALUES (NULL, {user["user_id"]}, '{token}');"""
     )
 
     return {
                 "token": token,
             }
 
-def verify_logon_user(token: str) -> bool:
-    logon_user = query_db(
-        f"""SELECT * FROM logon_users WHERE token='{token}';"""
+def logout_user(token: str):
+    if not verify_logon_user(token):
+        return {
+            "message": "User not even logged in.",
+        }
+
+    query_db(
+        f"""DELETE FROM logon_users WHERE token='{token}';"""
     )
 
-    if logon_user != []:
-        return True
-    else:
-        return False
-
-
-def verify_user_rights(token:str, rights: str) -> bool:
-    if not verify_logon_user(token):
-        return False
-    else:
-        rights_from_db = query_db(
-            f"""SELECT rights FROM logon_users WHERE token='{token}';"""
-        )[0]
-        if rights != rights:
-            return False
-        else: return True
+    return {
+        "message": "Logged out.",
+    }
 
 
 

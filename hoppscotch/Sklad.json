@@ -292,7 +292,40 @@
             "v": "11",
             "name": "Borrow parts",
             "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/parts/borrow/3,1,2/5,6,7",
+            "endpoint": "http://127.0.0.1:8000/parts/borrow/3,1,2/5,6,1",
+            "params": [],
+            "headers": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "active": true,
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "",
+                "active": true,
+                "description": ""
+              }
+            ],
+            "preRequestScript": "",
+            "testScript": "",
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "body": {
+              "contentType": null,
+              "body": null
+            },
+            "requestVariables": [],
+            "responses": {}
+          },
+          {
+            "v": "11",
+            "name": "Return parts",
+            "method": "POST",
+            "endpoint": "http://127.0.0.1:8000/parts/return/1,2,3",
             "params": [],
             "headers": [
               {
@@ -348,6 +381,46 @@
         },
         "headers": [],
         "_ref_id": "coll_m7z6qgxt_73191b49-6fb0-4130-8158-59b7817e4e4b"
+      },
+      {
+        "v": 6,
+        "name": "User",
+        "folders": [],
+        "requests": [
+          {
+            "v": "11",
+            "endpoint": "http://127.0.0.1:8000/login",
+            "name": "Login",
+            "params": [],
+            "headers": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "active": true,
+                "description": ""
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "preRequestScript": "",
+            "testScript": "",
+            "body": {
+              "contentType": "application/json",
+              "body": "{\n  \"username\": \"admin\",\n  \"password\": \"jožo\"\n}"
+            },
+            "requestVariables": [],
+            "responses": {}
+          }
+        ],
+        "auth": {
+          "authType": "inherit",
+          "authActive": true
+        },
+        "headers": [],
+        "_ref_id": "coll_m80t4axq_2bc8b493-fa3d-41b5-8d93-6d2dda12fbca"
       }
     ],
     "requests": [],

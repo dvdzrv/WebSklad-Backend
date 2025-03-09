@@ -1,4 +1,5 @@
 import sqlite3
+import os
 from types import NoneType
 
 
@@ -104,10 +105,7 @@ def init_db():
                 print(row)
 
 def reinit_db():
-    query_db("""DROP TABLE history;""")
-    query_db("""DROP TABLE borrowed;""")
-    query_db("""DROP TABLE users;""")
-    query_db("""DROP TABLE parts;""")
+    os.remove("db/test.db")
     init_db()
 
 #ZMAZANIE TABULKY PARTS
