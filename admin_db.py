@@ -1,8 +1,9 @@
 import sqlite3
 import os
-from types import NoneType
 
 
+#DB ACCESS
+##QUERY DB
 def query_db(query: str):
     db_con = sqlite3.connect('db/test.db')
     db_cursor = db_con.cursor()
@@ -13,6 +14,10 @@ def query_db(query: str):
     return rows
 
 
+
+#PART DICTIONARIES
+##PARTS
+###Construct part dictionary
 def construct_part(row):
     return {"part_id": row[0],
                  "category": row[1],
@@ -25,12 +30,16 @@ def construct_part(row):
                  "updated": row[8]
                }
 
+###Construct list of part dictionaries
 def construct_part_list(rows):
     parts = []
     for row in rows:
         parts.append(construct_part(row))
     return parts
 
+
+##BORROWED PARTS
+###Construct borrowed part dictionary
 def construct_borrowed_part(row):
     return {
         "borrowed_id": row[0],
@@ -38,6 +47,7 @@ def construct_borrowed_part(row):
         "count": row[2],
     }
 
+###Construct list borrowed part dictionaries
 def construct_borrowed_part_list(rows):
     parts = []
     for row in rows:
@@ -46,25 +56,10 @@ def construct_borrowed_part_list(rows):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#DB STUFF
-#INICIALIZACIA DB
+#DB TABLE HANDLING
+##INICIALIZATION OF TALBLES
 def init_db():
     db_con = sqlite3.connect('db/test.db')
-
     db_cursor = db_con.cursor()
 
     db_cursor.execute(
@@ -92,7 +87,6 @@ def init_db():
     )
 
     db_con.commit()
-
     db_con.close()
 
     holder = input("Do you want to input data? (Y/n)")
@@ -104,83 +98,52 @@ def init_db():
             for row in rows:
                 print(row)
 
+##Reinicialazion of tables
 def reinit_db():
     os.remove("db/test.db")
     init_db()
 
-#ZMAZANIE TABULKY PARTS
+
+##TABLE DELETION
+###Drop parts table
 def delete_parts():
-    db_con = sqlite3.connect('db/test.db')
-
-    db_cursor = db_con.cursor()
-
-    db_cursor.execute(
+    query_db(
         """DROP TABLE IF EXISTS parts"""
     )
 
-    db_con.commit()
-
-    db_con.close()
-
-
-#ZMAZANIE OBSAHU PARTS
+###Truncate parts table
 def truncate_parts():
-    db_con = sqlite3.connect('db/test.db')
-
-    db_cursor = db_con.cursor()
-
-    db_cursor.execute(
+    query_db(
         """DELETE FROM parts"""
     )
 
-    db_con.commit()
 
-    db_con.close()
-
-
-#VKLADANIE DO DB
-#VLOŽENIE Z CSV
+##INSERTING INTO TABLES
+###Insert parts from csv into parts table
 def input_data_to_db():
     from db import parser
-    db_con = sqlite3.connect('db/test.db')
-
-    db_cursor = db_con.cursor()
-
-    db_cursor.execute(
+    query_db(
         f"""INSERT INTO parts (part_id, category, sub_category, name, value, count, min_count) values {parser.parse()}"""
     )
 
-    db_con.commit()
-
-    db_con.close()
 
 
 
-
-
-
-
-
-
-
-
-
-#LIST PARTS FROM DB
-#LIST ALL PARTS
+#PARTS
+##LIST PARTS
+###List all parts
 def parts_list_all():
     return query_db(
         f"""SELECT * FROM parts"""
     )
 
-
-#LIST PART BY ID
+###List single part by id
 def parts_list_by_id(id):
     return query_db(
         f"""SELECT * FROM parts WHERE part_id ={id}"""
     )[0]
 
-
-#LIST MULTIPLE PARTS BY IDS
+###List multiple parts by id
 def parts_list_by_ids(part_ids: str):
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
@@ -188,28 +151,28 @@ def parts_list_by_ids(part_ids: str):
     part_ids_str = ""
     for i in range(len(part_ids)):
         part_ids_str += f"{part_ids[i]},"
-
     part_ids_str = part_ids_str[:-1]
 
     return query_db(
         f"""SELECT * FROM parts WHERE part_id IN ({part_ids_str})"""
     )
 
-#SEARCH IN PARTS
-#BY NAME
+##SEARCH PARTS
+###Search parts by name
 def parts_search_by_name(name):
     return query_db(f"""SELECT * FROM parts WHERE name LIKE '%{name}%'""")
 
-#BY CATEGORY
+###Search parts by category
 def parts_search_by_category(category):
     return query_db(f"""SELECT * FROM parts WHERE category LIKE '%{category}%'""")
 
-#BY SUBCATEGORY
+###Search parts by subcategory
 def parts_search_by_sub_category(sub_category):
     return query_db(f"""SELECT * FROM parts WHERE sub_category LIKE '%{sub_category}%'""")
 
 
-#CREATE PART
+##PART HANDLING
+###Create part
 def parts_create(part):
     part_parameters = ["name", "category", "sub_category", "value", "count", "min_count"]
     for parameter in part_parameters:
@@ -225,10 +188,10 @@ def parts_create(part):
 
     db_con.commit()
     db_con.close()
+
     return query_db(f"""SELECT * FROM parts ORDER BY part_id DESC LIMIT 1""")[0]
 
-
-#DELETE PARTS
+###Delete multiple parts by IDS
 def parts_delete_by_ids(part_ids: str):
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
@@ -243,7 +206,7 @@ def parts_delete_by_ids(part_ids: str):
     return {"message": f"parts {part_ids} deleted"}
 
 
-#UPDATE PART
+###Update part by ID
 def parts_update_by_id(part_id:int, parameters: dict):
     update = ""
     for parameter in parameters.keys():
@@ -254,14 +217,17 @@ def parts_update_by_id(part_id:int, parameters: dict):
     return query_db(f"""SELECT * FROM parts WHERE part_id = {part_id}""")[0]
 
 
-#LIST BORROWED PARTS
+
+#BORROWED PARTS
+##LIST BORROWED PARTS
+###List all borrowed parts
 def parts_borrowed_list():
     return query_db(
         """SELECT * FROM borrowed"""
     )
 
 
-#LIST BORROWED PARTS BY IDS
+###List multiple borrowed parts by IDS
 def parts_borrowed_list_by_ids(part_ids: str):
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
@@ -276,7 +242,9 @@ def parts_borrowed_list_by_ids(part_ids: str):
         f"""SELECT * FROM borrowed WHERE borrowed_id IN ({part_ids_str})"""
     )
 
-#DELETE BORROWED PARTS BY IDS
+
+##PART HANDLING
+###Delete borrowed parts by IDS
 def parts_borrowed_delete_by_ids(part_ids: str):
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
@@ -290,16 +258,7 @@ def parts_borrowed_delete_by_ids(part_ids: str):
 
     return {"message": f"Borrowed parts {part_ids} deleted."}
 
-
-
-
-
-
-
-
-
-
-#BORROW PARTS
+###Borrow parts by IDS and COUNTS
 def parts_borrow(part_ids:str, counts:str):
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
@@ -310,7 +269,6 @@ def parts_borrow(part_ids:str, counts:str):
     #CHECK IF NUMBER OF PART IDS AND PART COUNTS MATCH
     if len(part_ids) != len(counts):
         raise Exception("Length of IDS and COUNTS do not match.")
-
 
     for i in range(len(part_ids)):
         part = parts_list_by_id(part_ids[i])
@@ -336,12 +294,8 @@ def parts_borrow(part_ids:str, counts:str):
         #SET PART COUNTS IN PARTS TABLE
         parts_update_by_id(part_ids[i], {"count": part["count"] - counts[i]})
 
-
-
         #ADD BORROWED PARTS INTO BORROWED TABLE
         query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count) VALUES (NULL, {part_ids[i]}, {counts[i]})""")
-
-
 
     #RETURN BORROWED PARTS
     str = ""
@@ -350,8 +304,7 @@ def parts_borrow(part_ids:str, counts:str):
     str = str[:-1]
     return query_db(f"""SELECT part_id, count FROM borrowed WHERE part_id IN ({str})""")
 
-
-#RETURN PART
+###Return borrowed parts by IDS of borrowed parts
 def parts_return(borrowed_ids:str):
     borrowed_ids = borrowed_ids.split(',')
     borrowed_ids = [int(id) for id in borrowed_ids]
@@ -374,8 +327,6 @@ def parts_return(borrowed_ids:str):
             )
         )
 
-
-
         if part == [] or borrowed_part == []:
             raise Exception({
                 "message": "Part {borrowed_ids[i]} not found. Parts before this returned successfully.",
@@ -390,31 +341,65 @@ def parts_return(borrowed_ids:str):
 
 
 
+
+
+#INTERFACE TO INTERACT WITH DB
 #TODO MAKE BETTER INTERFACE
 if __name__ == "__main__":
     match input(
-        "What action would you like to do? (REINIT[R]/Delete parts table[D]/Truncate parts table[T]/Initialize DB[I]/Add parts to DB[A]/List all parts in DB[L])"):
-        case "R":
-            reinit_db()
+        "What category of action would you like to do?\n"
+        "Handle database (DB)\n"
+        "List parts (L)\n"
+        "List borrowed parts (B)\n"
+    ):
 
-        case "D":
-            delete_parts()
+        case "DB":
+            match input(
+                "What type of action would you like to do?\n"
+                "Query database by SQL (Q)\n"
+                "Initialize tables (I)\n"
+                "Reinitialize tables (R)\n"
+                "Delete parts table (D)\n"
+                "Truncate parts table (T)\n"
+                "Insert data to table from CSV file (C)"
+            ):
+                case "Q":
+                    try:
+                        print(
+                            query_db(
+                                input("Insert sql query: ")))
+                    except Exception as e:
+                        print(e)
 
-        case "T":
-            truncate_parts()
+                case "I":
+                    try:
+                        init_db()
+                    except Exception as e:
+                        print(e)
 
-        case "I":
-            init_db()
+                case "R":
+                    try:
+                        reinit_db()
+                    except Exception as e:
+                        print(e)
+
+                case "D":
+                        try:
+                            delete_parts()
+                        except Exception as e:
+                            print(e)
+
+                case "C":
+                        try:
+                            input_data_to_db()
+                        except Exception as e:
+                            print(e)
 
         case "L":
-            rows = parts_list_all()
-            for row in rows:
-                print(row)
+            print(parts_list_all())
 
-        case "A":
-            input_data_to_db()
-            holder = input("Do you want to list data? (Y/n)")
-            if holder == "y" or holder == "Y" or holder == "":
-                rows = parts_list_all()
-                for row in rows:
-                    print(row)
+        case "B":
+            print(parts_borrowed_list())
+
+
+

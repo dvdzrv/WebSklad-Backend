@@ -3,10 +3,14 @@ from uuid import uuid4
 import hashlib
 import datetime
 
+
+
 token_valid_time = datetime.timedelta(minutes=30)
 
 
 
+#USER DICTIONARIES
+##Construct user dictionary
 def construct_user(row):
     return {
         "user_id": row[0],
@@ -15,6 +19,7 @@ def construct_user(row):
         "rights": row[3],
     }
 
+##Construct list of user dictionaries
 def construct_user_list(rows):
     users = []
     for row in rows:
@@ -23,17 +28,17 @@ def construct_user_list(rows):
 
 
 
-
-
-
-
+#PASSWORD HANDLING
+##Hash password
 def hash_password(password: str) -> str:
     hashed_password = hashlib.sha256(password.encode()).hexdigest()
     return hashed_password
 
 
 
-
+#USERS
+##USER HANDLING
+###Create user
 def create_user(username: str, password: str, rights: str):
     query_db(
         f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES(NULL, {username}, '{hash_password(password)}', '{rights}'));"""
@@ -43,6 +48,7 @@ def create_user(username: str, password: str, rights: str):
         f"""SELECT user_id FROM users WHERE username = '{username}';"""
     )
 
+###Delete user
 def users_delete_by_ids(user_ids:str):
     user_ids = user_ids.split(",")
     user_ids = [int(user_id) for user_id in user_ids]
@@ -58,11 +64,10 @@ def users_delete_by_ids(user_ids:str):
 
 
 
+#USER AUTHENTICATION AND AUTHORIZATION
 
-
-
-
-
+#USER AUTHENTICATION
+##VERIFY IF USER IS LOGGED IN
 def verify_logon_user(token: str) -> bool:
     logon_user = query_db(
         f"""SELECT * FROM logon_users WHERE token='{token}';"""
@@ -73,6 +78,8 @@ def verify_logon_user(token: str) -> bool:
     else:
         return False
 
+
+##CHECK IF USER'S TOKEN IS VALID AND UNEXPIRED
 def check_token_validation(token: str):
     now = datetime.datetime.now()
     token_init_time = query_db(
@@ -88,6 +95,10 @@ def check_token_validation(token: str):
         )
         return False
 
+
+
+#USER AUTHORIZATION
+##VERIFY USER RIGHTS
 def verify_user_rights(token:str, rights: str) -> bool:
     if not verify_logon_user(token) or not check_token_validation(token):
         return False
@@ -102,12 +113,14 @@ def verify_user_rights(token:str, rights: str) -> bool:
             return False
         else: return True
 
+##AUTHENTICATE AND AUTHORIZE USER
 def authenticate_user(token:str, rights:str):
     if token == None or rights == "":
         return False
     elif verify_user_rights(token, rights):
         return True
 
+##DELETE EXPIRED TOKENS
 def delete_expired_tokens():
     now = datetime.datetime.now()
     tokens = query_db(
@@ -123,15 +136,8 @@ def delete_expired_tokens():
 
 
 
-
-
-
-
-
-
-
-
-
+##USER HANDLING
+###Login user
 def login_user(login:dict) -> dict:
     user = query_db(
         f"""SELECT * FROM users WHERE username='{login["username"]}';"""
@@ -158,6 +164,7 @@ def login_user(login:dict) -> dict:
                 "token": token,
             }
 
+###Logout user
 def logout_user(token: str):
     if not verify_logon_user(token):
         return {
@@ -171,18 +178,6 @@ def logout_user(token: str):
     return {
         "message": "Logged out.",
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
