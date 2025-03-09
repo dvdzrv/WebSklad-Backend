@@ -1,5 +1,9 @@
 # Prečítať hoppschotch/README.md DIKI
 
+# Ako skompilovať do exe
+pip install pyinstaller uvicorn fastapi 
+pyinstaller -F init.py --clean
+./dist/init
 
 
 # LISTING
