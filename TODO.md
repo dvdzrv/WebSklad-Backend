@@ -1,1 +1,0 @@
-Vytvorenie exec suboru cez pyinstaller
