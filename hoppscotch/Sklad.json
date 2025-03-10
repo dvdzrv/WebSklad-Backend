@@ -163,8 +163,8 @@
             "params": [],
             "headers": [
               {
-                "key": "Accept",
-                "value": "application/json",
+                "key": "token",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
                 "active": true,
                 "description": ""
               }
@@ -186,9 +186,16 @@
             "v": "11",
             "name": "Delete parts by IDS",
             "method": "DELETE",
-            "endpoint": "http://127.0.0.1:8000/parts/delete/122,123",
+            "endpoint": "http://127.0.0.1:8000/parts/delete/1,2,3",
             "params": [],
-            "headers": [],
+            "headers": [
+              {
+                "key": "token",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
+                "active": true,
+                "description": ""
+              }
+            ],
             "preRequestScript": "",
             "testScript": "",
             "auth": {
@@ -206,18 +213,12 @@
             "v": "11",
             "name": "Update part by ID",
             "method": "PUT",
-            "endpoint": "http://127.0.0.1:8000/parts/update/124",
+            "endpoint": "http://127.0.0.1:8000/parts/update/1",
             "params": [],
             "headers": [
               {
-                "key": "Accept",
-                "value": "application/json",
-                "active": true,
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "",
+                "key": "token",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
                 "active": true,
                 "description": ""
               }
@@ -230,7 +231,27 @@
             },
             "body": {
               "contentType": "application/json",
-              "body": "{\n    \"category\": \"Aktívna\",\n    \"sub_category\": \"test\",\n    \"name\": \"test\",\n    \"value\": \"0\",\n    \"count\": 1,\n    \"min_count\": 10\n  }"
+              "body": "{\n    \"category\": \"Aktívna\",\n    \"sub_category\": \"test\",\n    \"name\": \"test\",\n    \"value\": \"0\",\n    \"count\": 10,\n    \"min_count\": 10\n}"
+            },
+            "requestVariables": [],
+            "responses": {}
+          },
+          {
+            "v": "11",
+            "name": "Get img by ID",
+            "method": "GET",
+            "endpoint": "http://127.0.0.1:8000/image/32",
+            "params": [],
+            "headers": [],
+            "preRequestScript": "",
+            "testScript": "",
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "body": {
+              "contentType": null,
+              "body": null
             },
             "requestVariables": [],
             "responses": {}
@@ -296,14 +317,8 @@
             "params": [],
             "headers": [
               {
-                "key": "Accept",
-                "value": "application/json",
-                "active": true,
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "",
+                "key": "token",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
                 "active": true,
                 "description": ""
               }
@@ -325,18 +340,12 @@
             "v": "11",
             "name": "Return parts",
             "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/parts/return/1,2,3",
+            "endpoint": "http://127.0.0.1:8000/parts/return/1,2",
             "params": [],
             "headers": [
               {
-                "key": "Accept",
-                "value": "application/json",
-                "active": true,
-                "description": ""
-              },
-              {
-                "key": "Content-Type",
-                "value": "",
+                "key": "token",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
                 "active": true,
                 "description": ""
               }
@@ -358,9 +367,16 @@
             "v": "11",
             "name": "Delete borrowed parts",
             "method": "DELETE",
-            "endpoint": "http://127.0.0.1:8000/parts/borrowed/delete/1,2",
+            "endpoint": "http://127.0.0.1:8000/parts/borrowed/delete/1,2,3,4",
             "params": [],
-            "headers": [],
+            "headers": [
+              {
+                "key": "token",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
+                "active": true,
+                "description": ""
+              }
+            ],
             "preRequestScript": "",
             "testScript": "",
             "auth": {
@@ -423,11 +439,31 @@
             "headers": [
               {
                 "key": "token",
-                "value": "eda7f771c41a4dbbab72096623fe135f",
+                "value": "2df97d017552412c9c54a41cd7f441ea",
                 "active": true,
                 "description": ""
               }
             ],
+            "preRequestScript": "",
+            "testScript": "",
+            "auth": {
+              "authType": "inherit",
+              "authActive": true
+            },
+            "body": {
+              "contentType": null,
+              "body": null
+            },
+            "requestVariables": [],
+            "responses": {}
+          },
+          {
+            "v": "11",
+            "name": "List history",
+            "method": "GET",
+            "endpoint": "http://127.0.0.1:8000/history",
+            "params": [],
+            "headers": [],
             "preRequestScript": "",
             "testScript": "",
             "auth": {

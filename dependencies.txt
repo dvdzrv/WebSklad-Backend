@@ -1,0 +1,1 @@
+uvicorn, fastapi, requests, pyinstaller, python-dotenv
