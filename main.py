@@ -195,6 +195,7 @@ async def parts_return_by_id(borrowed_ids: str, response: Response, token: Annot
 #USER
 ##USER AUTHENTICATION
 ###Login user
+#TODO Poslať aj práva
 @app.post("/login")
 async def login_user(login: dict):
     from auth import login_user
@@ -263,8 +264,10 @@ async def images(part_id: int, response: Response):
 
 
 
-
-
-
 #TODO LIMITED COUNT/MIN COUNT
 #TODO ERROR CHECKING
+#TODO LIST ALL IMGS
+#TODO list borrowed parts kto má mať prístup
+#TODO list borrowed parts by ids kto má mať prístup
+#TODO History spristupniť len adminovi
+#TODO Košík v db na be ale zväčiť token čas
