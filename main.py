@@ -1,10 +1,12 @@
 from urllib import response
 from typing import Annotated
 from fastapi import FastAPI, Response, status, Header
+from fastapi.responses import FileResponse
 
 from auth import authenticate_user
 from admin_db import construct_part, construct_part_list, construct_borrowed_part, construct_borrowed_part_list
 from history import history_add_operation
+from imgs import *
 
 
 rights = ["all", "user", None]
@@ -246,6 +248,26 @@ async def user_create(user_ids: str, response: Response, token: Annotated[str | 
 async def history():
     from history import list_history, construct_history_list
     return construct_history_list(list_history())
+
+
+#Return all images
+@app.get("/image/{part_id}")
+async def images(part_id: int, response: Response):
+    img_path = get_img_by_id(part_id)
+    if not img_path is None:
+        return FileResponse(img_path)
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {
+            "message": f"Image for ID:{part_id} not found.",
+        }
+
+
+
+
+
+
+
 
 #TODO LIMITED COUNT/MIN COUNT
 #TODO ERROR CHECKING
