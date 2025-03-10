@@ -1,9 +1,26 @@
-# Prečítať hoppschotch/README.md DIKI
+# Backend API for project WebSklad
 
-# Ako skompilovať do exe
-pip install pyinstaller uvicorn fastapi 
+## How to deploy
+1. You either download latest released package from https://github.com/dvdzrv/FastAPIProject/releases or compile from source.
+2. Create .env file
+3. Copy everything from .env_example into .env
+4. Replace fields in .env as needed
+5. Place table (in .csv format) with parts into db/csvs/
+6. Run init executable file
+
+## How to compile from source into working executable:
+1. Download source code zip from github
+2. Download latest python
+3. Install requirements
+```
+pip install requirements.txt
+```
+4. Compile
+```
 pyinstaller -F init.py --clean
-./dist/init
+```
+Executable will be placed into dist/ directory.
+
 
 
 # LISTING

@@ -11,7 +11,5 @@ dist
 .env
 
 db/test.db
-db/imgs/*
-db/csvs/*
 
 test_imgs.py

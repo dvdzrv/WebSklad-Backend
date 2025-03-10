@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="pridanie .env a .env_example">
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,12 +221,12 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="FastAPI.FastAPIProject" />
-      <item itemvalue="Python.test_imgs" />
-      <item itemvalue="Python.init" />
-      <item itemvalue="Python.auth" />
       <item itemvalue="Python.admin_db" />
+      <item itemvalue="Python.auth" />
+      <item itemvalue="Python.init" />
       <item itemvalue="Python.parser" />
+      <item itemvalue="Python.test_imgs" />
+      <item itemvalue="FastAPI.FastAPIProject" />
     </list>
     <recent_temporary>
       <list>
@@ -269,6 +268,7 @@
       <workItem from="1741589671878" duration="5035000" />
       <workItem from="1741594726878" duration="341000" />
       <workItem from="1741605746767" duration="1148000" />
+      <workItem from="1741608459846" duration="15000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
