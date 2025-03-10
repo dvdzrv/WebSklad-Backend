@@ -1,4 +1,4 @@
-from urllib import response
+#from urllib import response
 from typing import Annotated
 from fastapi import FastAPI, Response, status, Header
 from fastapi.responses import FileResponse
@@ -77,7 +77,6 @@ async def parts_create(part: dict, response: Response, token: Annotated[str | No
 
 ##Delete multiple parts by IDS
 #TODO make sure parts are deleted properly, Error checking
-#TODO delete parts from borrowed too
 @app.delete("/parts/delete/{part_ids}")
 async def parts_delete_by_ids(part_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_delete_by_ids
@@ -144,7 +143,6 @@ async def parts_borrowed_delete_by_ids(borrowed_ids: str, response: Response, to
 
 ###Borrow parts
 #TODO in admin_db, works, but doesn't check min count
-#TODO ERROR LIST OUT OF RANGE
 @app.post("/parts/borrow/{part_ids}/{counts}")
 async def parts_update(part_ids: str, counts: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_borrow
@@ -169,7 +167,6 @@ async def parts_update(part_ids: str, counts: str, response: Response, token: An
         }
 
 ###Return borrowed parts
-##TODO ERROR LIST OUT OF RANGE, DELETED PART BUT NOT BORROWED
 @app.post("/parts/return/{borrowed_ids}")
 async def parts_return_by_id(borrowed_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_return

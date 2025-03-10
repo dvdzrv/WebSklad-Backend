@@ -1,7 +1,16 @@
+import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+dotenv_path = Path('.env')
+load_dotenv(dotenv_path=dotenv_path)
+
+
 def parse():
+    table_name = os.getenv('TABLE_NAME')
     string = ""
 
-    with open('db/csvs/tabulka.csv', "r", encoding="utf-8") as csv_file:
+    with open(f'db/csvs/{table_name}.csv', "r", encoding="utf-8") as csv_file:
         import csv
         csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"')
         line_count = 0

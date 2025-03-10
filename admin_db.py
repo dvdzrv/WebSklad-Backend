@@ -1,5 +1,11 @@
 import sqlite3
 import os
+from dotenv import load_dotenv
+from pathlib import Path
+
+dotenv_path = Path('.env')
+load_dotenv(dotenv_path=dotenv_path)
+
 
 
 #DB ACCESS
@@ -74,8 +80,11 @@ def init_db():
         """CREATE TABLE IF NOT EXISTS users (user_id integer PRIMARY KEY, username text NOT NULL, hashed_pass text NOT NULL, rights text NOT NULL);"""
     )
 
+    from auth import hash_password
+    default_password = os.getenv("DEFAULT_PASSWORD")
+
     db_cursor.execute(
-        """INSERT INTO users (user_id, username, hashed_pass, rights) VALUES (NULL, "admin", "27c243824cf515818c905231c215ae7ce8282240b29752f816c22548768c1c53", "all");"""
+        f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES (NULL, "admin", '{hash_password(default_password)}', "all");"""
     )
 
     db_cursor.execute(
@@ -202,6 +211,7 @@ def parts_delete_by_ids(part_ids: str):
     part_ids_str = part_ids_str[:-1]
 
     query_db(f"""DELETE FROM parts WHERE part_id IN ({part_ids_str})""")
+    query_db(f"""DELETE FROM borrowed WHERE part_id IN ({part_ids_str})""")
 
     return {"message": f"parts {part_ids} deleted"}
 
