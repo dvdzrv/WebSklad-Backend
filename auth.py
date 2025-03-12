@@ -5,7 +5,7 @@ import datetime
 
 
 
-token_valid_time = datetime.timedelta(minutes=30)
+token_valid_time = datetime.timedelta(hours=2)
 
 
 

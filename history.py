@@ -28,7 +28,11 @@ def history_add_operation(token: str, operation: str):
         user_id = get_user_id_by_token(token)
 
         query_db(
-            f"""INSERT INTO history (history_id, user_id, operation) VALUES (NULL, '{user_id}', '{operation}')"""
+            f"""INSERT INTO history (history_id, user_id, operation) VALUES (NULL, '{user_id}', '{operation}');"""
         )
-    except Exception as e:
-        print(e)
+
+    except IndexError:
+        query_db(
+            f"""INSERT INTO history (history_id, user_id, operation) VALUES (NULL, '0', '{operation}');"""
+        )
+    

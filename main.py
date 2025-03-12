@@ -2,6 +2,7 @@
 from typing import Annotated
 from fastapi import FastAPI, Response, status, Header
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from auth import authenticate_user
 from admin_db import construct_part, construct_part_list, construct_borrowed_part, construct_borrowed_part_list
@@ -9,11 +10,25 @@ from history import history_add_operation
 from imgs import *
 
 
-rights = ["all", "user", None]
+#rights = ["all", "user", None]
 
+
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://localhost:*",
+]
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 #PARTS
@@ -113,15 +128,30 @@ async def parts_update_by_id(part_id:int, parameters: dict, response: Response, 
 ##LISTING
 ###List all borrowed parts
 @app.get("/parts/borrowed/list")
-async def parts_borrowed_list():
+async def parts_borrowed_list(response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_borrowed_list
-    return construct_borrowed_part_list(parts_borrowed_list())
+    rights = "user"
+    if authenticate_user(token, rights):
+        return construct_borrowed_part_list(parts_borrowed_list())
+    else:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {
+            "message": f"Unauthorized to list borrowed parts.",
+        }
 
 ###List borrowed parts by IDS
 @app.get("/parts/borrowed/list/{part_ids}")
-async def parts_borrowed_list_by_ids(part_ids: str):
+async def parts_borrowed_list_by_ids(part_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_borrowed_list_by_ids
-    return construct_borrowed_part_list(parts_borrowed_list_by_ids(part_ids))
+    rights = "user"
+    if authenticate_user(token, rights):
+        return construct_borrowed_part_list(parts_borrowed_list_by_ids(part_ids))
+    else:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {
+            "message": f"Unauthorized to list borrowed parts.",
+        }
+
 
 
 ##BORROWED PART HANDLING
@@ -147,17 +177,17 @@ async def parts_borrowed_delete_by_ids(borrowed_ids: str, response: Response, to
 async def parts_update(part_ids: str, counts: str, response: Response, token: Annotated[str | None, Header()] = None):
     from admin_db import parts_borrow
     rights = "user"
+
     if authenticate_user(token, rights):
-        try:
-            parts_borrow(part_ids, counts)
-        except Exception as e:
-            history_add_operation(token, f"User failed borrowing parts {part_ids}.")
-            response.status_code = status.HTTP_400_BAD_REQUEST
-            return {"message": str(e)}
+        messages = parts_borrow(part_ids, counts)
+
+        if messages is not []:
+            response.status_code = status.HTTP_207_MULTI_STATUS
+            history_add_operation(token, f"User tried borrowing parts {part_ids}, {messages}.")
+            return messages
         else:
-            history_add_operation(token, f"User borrowed parts {part_ids}.")
             return {
-                "message": f"Successfully borrowed parts {part_ids}.",
+                "message": "Borrowed parts."
             }
     else:
         history_add_operation(token, f"User failed borrowing parts {part_ids}.")
@@ -243,12 +273,18 @@ async def user_create(user_ids: str, response: Response, token: Annotated[str | 
 
 #List history
 @app.get("/history")
-async def history():
+async def history(response: Response, token: Annotated[str | None, Header()] = None):
     from history import list_history, construct_history_list
-    return construct_history_list(list_history())
+    rights = "user"
+    if authenticate_user(token, rights):
+        return construct_history_list(list_history())
+    else:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {
+            "message": f"Unauthorized to list history.",
+        }
 
-
-#Return all images
+#Return image by id
 @app.get("/image/{part_id}")
 async def images(part_id: int, response: Response):
     img_path = get_img_by_id(part_id)
@@ -260,14 +296,20 @@ async def images(part_id: int, response: Response):
             "message": f"Image for ID:{part_id} not found.",
         }
 
+@app.get("/image")
+async def images_all():
+    pass
 
 
 
 
-#TODO LIMITED COUNT/MIN COUNT
+
+#TODO LIMITED COUNT/MIN COUNT - vyberie ale upozorní
+
+
 #TODO ERROR CHECKING
 #TODO LIST ALL IMGS
-#TODO list borrowed parts kto má mať prístup
-#TODO list borrowed parts by ids kto má mať prístup
-#TODO History spristupniť len adminovi
-#TODO Košík v db na be ale zväčiť token čas
+
+
+
+#TODO Košík v db na BackEnde alebo zväčiť token expiring - zväčšili sme token čas

@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="pridanie .env a .env_example">
-      <change beforePath="$PROJECT_DIR$/.idea/FastAPIProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastAPIProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="pridanie #TODOs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_db.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history.py" beforeDir="false" afterPath="$PROJECT_DIR$/history.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,36 +52,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "FastAPI.FastAPIProject.executor": "Run",
-    "Python.admin_db.executor": "Run",
-    "Python.auth.executor": "Run",
-    "Python.init.executor": "Run",
-    "Python.init_db.executor": "Run",
-    "Python.parser.executor": "Run",
-    "Python.test_imgs.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
-    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/kaneki/PycharmProjects/FastAPIProject/db/csvs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;FastAPI.FastAPIProject.executor&quot;: &quot;Run&quot;,
+    &quot;Python.admin_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python.auth.executor&quot;: &quot;Run&quot;,
+    &quot;Python.init.executor&quot;: &quot;Run&quot;,
+    &quot;Python.init_db.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parser.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_imgs.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/kaneki/pwsh&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/db/csvs" />
@@ -92,7 +93,7 @@
       <recent name="$PROJECT_DIR$/src/csv" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.admin_db">
+  <component name="RunManager" selected="FastAPI.FastAPIProject">
     <configuration name="admin_db" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="FastAPIProject" />
       <option name="ENV_FILES" value="" />
@@ -233,10 +234,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_imgs" />
         <item itemvalue="Python.admin_db" />
         <item itemvalue="Python.init" />
         <item itemvalue="Python.parser" />
-        <item itemvalue="Python.test_imgs" />
         <item itemvalue="Python.auth" />
       </list>
     </recent_temporary>
@@ -272,7 +273,14 @@
       <workItem from="1741594726878" duration="341000" />
       <workItem from="1741605746767" duration="1148000" />
       <workItem from="1741608459846" duration="15000" />
-      <workItem from="1741627872872" duration="643000" />
+      <workItem from="1741627872872" duration="1269000" />
+      <workItem from="1741629493011" duration="646000" />
+      <workItem from="1741630636097" duration="1891000" />
+      <workItem from="1741676318773" duration="2604000" />
+      <workItem from="1741678980196" duration="2262000" />
+      <workItem from="1741681508648" duration="3721000" />
+      <workItem from="1741724231944" duration="103000" />
+      <workItem from="1741763937575" duration="336000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -466,7 +474,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741606845586</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="pridanie #TODOs">
+      <option name="closed" value="true" />
+      <created>1741628938388</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1741628938388</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -491,11 +507,14 @@
     <MESSAGE value="Pridanie imgs" />
     <MESSAGE value="Pridanie dependencies.txt, Sklad.json, uprava .gitignore" />
     <MESSAGE value="pridanie .env a .env_example" />
-    <option name="LAST_COMMIT_MESSAGE" value="pridanie .env a .env_example" />
+    <MESSAGE value="pridanie #TODOs" />
+    <option name="LAST_COMMIT_MESSAGE" value="pridanie #TODOs" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FastAPIProject1$admin_db.coverage" NAME="admin_db Coverage Results" MODIFIED="1741628021058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/FastAPIProject$init.coverage" NAME="init Coverage Results" MODIFIED="1741539426412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FastAPIProject1$FastAPIProject.coverage" NAME="FastAPIProject Coverage Results" MODIFIED="1741681918259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/FastAPIProject1$test_imgs.coverage" NAME="test_imgs Coverage Results" MODIFIED="1741630926996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FastAPIProject$auth.coverage" NAME="auth Coverage Results" MODIFIED="1741482805350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FastAPIProject$admin_db.coverage" NAME="admin_db Coverage Results" MODIFIED="1741606792271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/FastAPIProject$test_imgs.coverage" NAME="test_imgs Coverage Results" MODIFIED="1741593053871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

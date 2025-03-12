@@ -25,6 +25,8 @@ def query_db(query: str):
 ##PARTS
 ###Construct part dictionary
 def construct_part(row):
+    if not row:
+        return None
     return {"part_id": row[0],
                  "category": row[1],
                  "sub_category": row[2],
@@ -38,6 +40,8 @@ def construct_part(row):
 
 ###Construct list of part dictionaries
 def construct_part_list(rows):
+    if not rows:
+        return []
     parts = []
     for row in rows:
         parts.append(construct_part(row))
@@ -169,7 +173,7 @@ def parts_list_by_ids(part_ids: str):
 ##SEARCH PARTS
 ###Search parts by name
 def parts_search_by_name(name):
-    return query_db(f"""SELECT * FROM parts WHERE name LIKE '%{name}%'""")
+    return query_db(f"""SELECT * FROM parts WHERE CONCAT(parts.name, ' ', parts.value) LIKE '%{name}%'""")
 
 ###Search parts by category
 def parts_search_by_category(category):
@@ -276,36 +280,53 @@ def parts_borrow(part_ids:str, counts:str):
     counts = counts.split(',')
     counts = [int(id) for id in counts]
 
+    current_part_is_okay = True
+    messages = []
+
     #CHECK IF NUMBER OF PART IDS AND PART COUNTS MATCH
     if len(part_ids) != len(counts):
-        raise Exception("Length of IDS and COUNTS do not match.")
+        messages += {
+            "message": "Length of IDS and COUNTS do not match."
+        }
+        return messages
 
     for i in range(len(part_ids)):
         part = parts_list_by_id(part_ids[i])
 
         #CHECK IF PART IS FOUND
-        if part == []:
-            raise Exception(f"Part {part_ids[i]} not found.")
+        if not part:
+            messages += {
+                "message": f"Part not found.",
+                "part_id": part_ids[i],
+            }
+            current_part_is_okay = False
 
         part = construct_part(part)
 
         #CHECK IF THERE IS ENOUGH PARTS
         if part["count"] - counts[i] < 0:
-            raise Exception(f"There is not enough of part: {part_ids[i]}. You requested {counts[i] - part["count"]} more parts.")
+            messages += {
+                "message": f"There is not enough of part.",
+                "part_id": part_ids[i],
+            }
+            current_part_is_okay = False
 
         #CHECK IF BORROWING WON'T LEAVE FEWER PARTS THAN MIN COUNT
-        #TODO FINISH
-        #if type(part["min_count"]) != NoneType:
-        #    if part["count"] - counts[i] < part["min_count"]:
-        #        return {
-        #            "message:" f"Part {part_ids[i]} you requested will be borrowed, but it leaves less parts in storage, than minimal count.",
-        #        }
+        if type(part["min_count"]) is not None:
+            if part["count"] - counts[i] < part["min_count"]:
+                messages += {
+                    "message": f"Borrowing leaves less parts in storage than min val.",
+                    "part_id": part_ids[i],
+                }
 
-        #SET PART COUNTS IN PARTS TABLE
-        parts_update_by_id(part_ids[i], {"count": part["count"] - counts[i]})
+        if current_part_is_okay:
+            #SET PART COUNTS IN PARTS TABLE
+            parts_update_by_id(part_ids[i], {"count": part["count"] - counts[i]})
 
-        #ADD BORROWED PARTS INTO BORROWED TABLE
-        query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count) VALUES (NULL, {part_ids[i]}, {counts[i]})""")
+            #ADD BORROWED PARTS INTO BORROWED TABLE
+            query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count) VALUES (NULL, {part_ids[i]}, {counts[i]})""")
+
+    return messages
 
     #RETURN BORROWED PARTS
     str = ""
