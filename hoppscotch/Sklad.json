@@ -240,7 +240,7 @@
             "v": "11",
             "name": "Get img by ID",
             "method": "GET",
-            "endpoint": "http://127.0.0.1:8000/image/32",
+            "endpoint": "http://127.0.0.1:8000/image/7",
             "params": [],
             "headers": [],
             "preRequestScript": "",

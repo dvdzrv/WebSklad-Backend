@@ -296,7 +296,7 @@ async def images(part_id: int, response: Response):
             "message": f"Image for ID:{part_id} not found.",
         }
 
-@app.get("/image")
+@app.get("/images")
 async def images_all():
     pass
 
