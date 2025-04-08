@@ -193,7 +193,7 @@ def delete_expired_tokens():
     tokens = query_db(
         f"""SELECT logon_id, generated_time FROM logon_users;"""
     )
-
+    print(tokens)
     from history import history_add_operation
 
     for token in tokens:

@@ -1,5 +1,7 @@
 import sqlite3
 import os
+from types import NoneType
+
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -312,8 +314,8 @@ def parts_borrow(part_ids:str, counts:str):
             current_part_is_okay = False
 
         #CHECK IF BORROWING WON'T LEAVE FEWER PARTS THAN MIN COUNT
-        if type(part["min_count"]) is not None:
-            if part["count"] - counts[i] < part["min_count"]:
+        if type(part["min_count"]) is not NoneType:
+            if (part["count"] - counts[i]) < part["min_count"]:
                 messages += {
                     "message": f"Borrowing leaves less parts in storage than min val.",
                     "part_id": part_ids[i],
