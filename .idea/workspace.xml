@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Nový hoppscotch conf">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_db.py" afterDir="false" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Oprava z None na NoneType, pridanie requirements.txt, atď">
       <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -290,7 +286,7 @@
       <workItem from="1742551264661" duration="784000" />
       <workItem from="1743588876314" duration="218000" />
       <workItem from="1743772434987" duration="16000" />
-      <workItem from="1744135479732" duration="606000" />
+      <workItem from="1744135479732" duration="771000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -508,7 +504,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741764626100</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Oprava z None na NoneType, pridanie requirements.txt, atď">
+      <option name="closed" value="true" />
+      <created>1744136151452</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1744136151452</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -536,7 +540,8 @@
     <MESSAGE value="pridanie #TODOs" />
     <MESSAGE value="Pridanie cors middleware" />
     <MESSAGE value="Nový hoppscotch conf" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nový hoppscotch conf" />
+    <MESSAGE value="Oprava z None na NoneType, pridanie requirements.txt, atď" />
+    <option name="LAST_COMMIT_MESSAGE" value="Oprava z None na NoneType, pridanie requirements.txt, atď" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FastAPIProject1$admin_db.coverage" NAME="admin_db Coverage Results" MODIFIED="1741628021058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
