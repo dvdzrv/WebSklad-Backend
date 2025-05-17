@@ -21,7 +21,7 @@ def parse():
                 for i in range(len(row)):
                     if row[i] == "":
                         row[i] = "NULL"
-                string += f"(NULL, \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", {row[5]}, {row[6]}),"
+                string += f"(NULL, \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", {row[5]}, {row[6]}, {row[7]}),"
                 line_count += 1
         print(f'Processed {line_count} lines.')
 

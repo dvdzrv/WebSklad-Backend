@@ -75,15 +75,15 @@ def init_db():
     db_cursor = db_con.cursor()
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS parts (part_id integer PRIMARY KEY, category text, sub_category text null, name text, value text null, count int not null, min_count int null, create_time timestamp DEFAULT CURRENT_TIMESTAMP, updated_time timestamp DEFAULT CURRENT_TIMESTAMP);"""
+        """CREATE TABLE IF NOT EXISTS parts (part_id INTEGER PRIMARY KEY, category TEXT NULL, sub_category TEXT NULL, name TEXT NULL, value TEXT NULL, count INT NOT NULL, min_count INT DEFAULT NULL, description TEXT DEFAULT NULL, create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"""
     )
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS borrowed (borrowed_id integer PRIMARY KEY, part_id integer NOT NULL, count integer NOT NULL, FOREIGN KEY(part_id) REFERENCES parts(part_id));"""
+        """CREATE TABLE IF NOT EXISTS borrowed (borrowed_id INTEGER PRIMARY KEY, part_id INTEGER NOT NULL, user_id INTEGER NOT NULL, count INTEGER NOT NULL, FOREIGN KEY(part_id) REFERENCES parts(part_id), FOREIGN KEY(user_id) REFERENCES users(user_id));"""
     )
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS users (user_id integer PRIMARY KEY, username text NOT NULL, hashed_pass text NOT NULL, rights text NOT NULL);"""
+        """CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username TEXT NOT NULL, hashed_pass TEXT NOT NULL, rights TEXT NOT NULL);"""
     )
 
     from auth import hash_password
@@ -94,11 +94,15 @@ def init_db():
     )
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS history (history_id integer PRIMARY KEY, user_id integer NOT NULL, operation text NOT NULL, time timestamp DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(user_id) REFERENCES users(user_id));"""
+        """CREATE TABLE IF NOT EXISTS history (history_id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL, operation TEXT NOT NULL, affected_ids TEXT NULL, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(user_id) REFERENCES users(user_id));"""
     )
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS logon_users (logon_id integer PRIMARY KEY, user_id integer, token text NOT NULL, generated_time timestamp DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (user_id) REFERENCES users (user_id));"""
+        """CREATE TABLE IF NOT EXISTS logon_users (logon_id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL, token TEXT NOT NULL, generated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (user_id) REFERENCES users (user_id));"""
+    )
+
+    db_cursor.execute(
+        """CREATE TABLE IF NOT EXISTS schemas (schema_id INTEGER PRIMARY KEY, schema_name TEXT NOT NULL, part_ids TEXT NOT NULL, part_counts TEXT NOT NULL, schema_description TEXT DEFAULT NULL);"""
     )
 
     db_con.commit()
@@ -138,7 +142,7 @@ def truncate_parts():
 def input_data_to_db():
     from db import parser
     query_db(
-        f"""INSERT INTO parts (part_id, category, sub_category, name, value, count, min_count) values {parser.parse()}"""
+        f"""INSERT INTO parts (part_id, category, sub_category, name, value, count, min_count, description) values {parser.parse()}"""
     )
 
 
