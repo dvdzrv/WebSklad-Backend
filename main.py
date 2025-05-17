@@ -4,7 +4,7 @@ from fastapi import FastAPI, Response, status, Header
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from auth import authenticate_user
+from auth import authenticate_user, construct_user_list, construct_public_user_list
 from admin_db import construct_part, construct_part_list, construct_borrowed_part, construct_borrowed_part_list
 from history import history_add_operation
 from imgs import *
@@ -18,6 +18,7 @@ origins = [
     "http://localhost:3000",
     "http://localhost:8000",
     "http://localhost:*",
+    "*"
 ]
 
 app = FastAPI()
@@ -269,6 +270,22 @@ async def user_create(user_ids: str, response: Response, token: Annotated[str | 
         return {
             "message": f"Unauthorized to delete users.",
         }
+
+###List users by IDS
+@app.get("/users/list/{user_ids}")
+async def users_list_by_ids(user_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
+    from auth import list_users_by_ids
+    rights = "all"
+    if authenticate_user(token, rights):
+        history_add_operation(token, f"Listed users.")
+        return construct_public_user_list(users_list_by_ids(user_ids))
+    else:
+        history_add_operation(token, f"Failed to list users.")
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {
+            "message": f"Unauthorized to list users.",
+        }
+
 
 
 #List history
