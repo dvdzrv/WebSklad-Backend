@@ -67,7 +67,20 @@ def construct_borrowed_part_list(rows):
         parts.append(construct_borrowed_part(row))
     return parts
 
+def construct_schema(row):
+    return {
+        "schema_id": row[0],
+        "schema_name": row[1],
+        "schema_description": row[4],
+        "parts": row[2],
+        "part_counts": row[3],
+    }
 
+def construct_schema_list(rows):
+    schemas = []
+    for row in rows:
+        schemas.append(construct_schema(row))
+    return schemas
 
 #DB TABLE HANDLING
 ##INICIALIZATION OF TALBLES

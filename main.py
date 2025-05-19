@@ -329,7 +329,10 @@ async def images_all():
     pass
 
 
-
+@app.get("/schemas")
+async def list_schemas():
+    from admin_db import construct_schema_list, query_db
+    return construct_schema_list(query_db("""SELECT * FROM schemas"""))
 
 
 #TODO LIMITED COUNT/MIN COUNT - vyberie ale upozorní

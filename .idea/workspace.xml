@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Oprava z None na NoneType, pridanie requirements.txt, atď">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FastAPIProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastAPIProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="fu. vela toho">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_db.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin_db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/csvs/tabulka.csv" beforeDir="false" afterPath="$PROJECT_DIR$/db/csvs/tabulka.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hoppscotch/Sklad.json" beforeDir="false" afterPath="$PROJECT_DIR$/hoppscotch/Sklad.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -437,7 +430,7 @@
       <workItem from="1747501828622" duration="70000" />
       <workItem from="1747634042347" duration="108000" />
       <workItem from="1747676517799" duration="568000" />
-      <workItem from="1747679304349" duration="2714000" />
+      <workItem from="1747679304349" duration="3303000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -679,7 +672,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744136430508</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="fu. vela toho">
+      <option name="closed" value="true" />
+      <created>1747682123419</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1747682123419</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -708,7 +709,8 @@
     <MESSAGE value="Pridanie cors middleware" />
     <MESSAGE value="Nový hoppscotch conf" />
     <MESSAGE value="Oprava z None na NoneType, pridanie requirements.txt, atď" />
-    <option name="LAST_COMMIT_MESSAGE" value="Oprava z None na NoneType, pridanie requirements.txt, atď" />
+    <MESSAGE value="fu. vela toho" />
+    <option name="LAST_COMMIT_MESSAGE" value="fu. vela toho" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FastAPIProject$FastAPIProject.coverage" NAME="FastAPIProject Coverage Results" MODIFIED="1741606091779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -716,7 +718,7 @@
     <SUITE FILE_PATH="coverage/FastAPIProject1$init.coverage" NAME="init Coverage Results" MODIFIED="1741627891704" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FastAPIProject1$FastAPIProject.coverage" NAME="FastAPIProject Coverage Results" MODIFIED="1744136334973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/FastAPIProject$admin_db.coverage" NAME="admin_db Coverage Results" MODIFIED="1747680097658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/FastAPIProject$init.coverage" NAME="init Coverage Results" MODIFIED="1747681891520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/FastAPIProject$init.coverage" NAME="init Coverage Results" MODIFIED="1747682025540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FastAPIProject$auth.coverage" NAME="auth Coverage Results" MODIFIED="1741482805350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FastAPIProject$test_imgs.coverage" NAME="test_imgs Coverage Results" MODIFIED="1741593053871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/FastAPIProject1$test_imgs.coverage" NAME="test_imgs Coverage Results" MODIFIED="1741630926996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
