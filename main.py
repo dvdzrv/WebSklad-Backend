@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import FastAPI, Response, status, Header
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import Strict
 
 from auth import authenticate_user, construct_user_list, construct_public_user_list
 from admin_db import construct_part, construct_part_list, construct_borrowed_part, construct_borrowed_part_list
@@ -180,7 +181,7 @@ async def parts_update(part_ids: str, counts: str, response: Response, token: An
     rights = "user"
 
     if authenticate_user(token, rights):
-        messages = parts_borrow(part_ids, counts)
+        messages = parts_borrow(part_ids, counts, token)
 
         if messages:
             response.status_code = status.HTTP_207_MULTI_STATUS
@@ -228,9 +229,16 @@ async def parts_return_by_id(borrowed_ids: str, response: Response, token: Annot
 ###Login user
 #TODO Poslať aj práva
 @app.post("/login")
-async def login_user(login: dict):
+async def login_user(login: dict, response: Response):
     from auth import login_user
-    return login_user(login)
+    try:
+        return login_user(login)
+    except Exception as e:
+        response.status_code = status.HTTP_401_UNAUTHORIZED
+        return {
+            "message": str(e),
+        }
+
 
 ###Logout user
 @app.post("/logout")
@@ -257,13 +265,16 @@ async def user_create(user: dict, response: Response, token: Annotated[str | Non
         }
 
 ###Delete multiple users by IDS
-@app.post("/user/delete/{user_ids}")
+@app.delete("/user/delete/{user_ids}")
 async def user_create(user_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from auth import users_delete_by_ids
     rights = "all"
     if authenticate_user(token, rights):
         history_add_operation(token, f"User deleted users {user_ids}.")
-        return users_delete_by_ids(user_ids)
+        users_delete_by_ids(user_ids)
+        return {
+            "message": f"Successfully deleted users.",
+        }
     else:
         history_add_operation(token, f"User failed to delete users {user_ids}.")
         response.status_code = status.HTTP_401_UNAUTHORIZED
@@ -272,13 +283,13 @@ async def user_create(user_ids: str, response: Response, token: Annotated[str | 
         }
 
 ###List users by IDS
-@app.get("/users/list/{user_ids}")
+@app.get("/user/list/{user_ids}")
 async def users_list_by_ids(user_ids: str, response: Response, token: Annotated[str | None, Header()] = None):
     from auth import list_users_by_ids
     rights = "all"
     if authenticate_user(token, rights):
         history_add_operation(token, f"Listed users.")
-        return construct_public_user_list(users_list_by_ids(user_ids))
+        return construct_public_user_list(list_users_by_ids(user_ids))
     else:
         history_add_operation(token, f"Failed to list users.")
         response.status_code = status.HTTP_401_UNAUTHORIZED

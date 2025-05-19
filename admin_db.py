@@ -57,6 +57,7 @@ def construct_borrowed_part(row):
         "borrowed_id": row[0],
         "part_id": row[1],
         "count": row[2],
+        "user_id": row[3],
     }
 
 ###Construct list borrowed part dictionaries
@@ -94,7 +95,7 @@ def init_db():
     )
 
     db_cursor.execute(
-        """CREATE TABLE IF NOT EXISTS history (history_id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL, operation TEXT NOT NULL, affected_ids TEXT NULL, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(user_id) REFERENCES users(user_id));"""
+        """CREATE TABLE IF NOT EXISTS history (history_id INTEGER PRIMARY KEY, user_id INTEGER NOT NULL, operation TEXT NOT NULL, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(user_id) REFERENCES users(user_id));"""
     )
 
     db_cursor.execute(
@@ -243,7 +244,7 @@ def parts_update_by_id(part_id:int, parameters: dict):
 ###List all borrowed parts
 def parts_borrowed_list():
     return query_db(
-        """SELECT * FROM borrowed"""
+        """SELECT borrowed_id, part_id, count, user_id FROM borrowed"""
     )
 
 
@@ -279,7 +280,7 @@ def parts_borrowed_delete_by_ids(part_ids: str):
     return {"message": f"Borrowed parts {part_ids} deleted."}
 
 ###Borrow parts by IDS and COUNTS
-def parts_borrow(part_ids:str, counts:str):
+def parts_borrow(part_ids:str, counts:str, token:str):
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
 
@@ -329,8 +330,9 @@ def parts_borrow(part_ids:str, counts:str):
             #SET PART COUNTS IN PARTS TABLE
             parts_update_by_id(part_ids[i], {"count": part["count"] - counts[i]})
 
+            from auth import get_user_id_by_token
             #ADD BORROWED PARTS INTO BORROWED TABLE
-            query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count) VALUES (NULL, {part_ids[i]}, {counts[i]})""")
+            query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count, user_id) VALUES (NULL, {part_ids[i]}, {counts[i]}, {get_user_id_by_token(token)})""")
 
     return messages
 
@@ -375,6 +377,16 @@ def parts_return(borrowed_ids:str):
         parts_update_by_id(part["part_id"], {"count": part["count"] + borrowed_part["count"]})
 
         parts_borrowed_delete_by_ids(str(borrowed_ids[i]))
+
+
+
+
+
+
+
+
+
+
 
 
 

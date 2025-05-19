@@ -81,10 +81,10 @@ def list_users_by_ids(user_ids:str):
 ###Create user
 def create_user(username: str, password: str, rights: str):
     query_db(
-        f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES(NULL, {username}, '{hash_password(password)}', '{rights}'));"""
+        f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES(NULL, '{username}', '{hash_password(password)}', '{rights}');"""
     )
 
-    return construct_user(
+    return construct_public_user(
         query_db(
             f"""SELECT user_id, username, rights FROM users WHERE username = '{username}'"""
         )[0]
