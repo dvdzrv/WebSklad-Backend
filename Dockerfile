@@ -5,4 +5,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["python", "docker_init.py &&", "python", "init.py"]
+CMD ["python", "docker_init.py"]
