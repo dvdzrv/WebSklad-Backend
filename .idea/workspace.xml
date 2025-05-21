@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Dockerfile">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_init.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -420,7 +421,7 @@
       <workItem from="1747634042347" duration="108000" />
       <workItem from="1747676517799" duration="568000" />
       <workItem from="1747679304349" duration="3404000" />
-      <workItem from="1747811744539" duration="6020000" />
+      <workItem from="1747811744539" duration="6354000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -766,7 +767,31 @@
       <option name="project" value="LOCAL" />
       <updated>1747822243328</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Dockerfile">
+      <option name="closed" value="true" />
+      <created>1747822955189</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1747822955189</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Dockerfile">
+      <option name="closed" value="true" />
+      <created>1747822995952</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1747822995952</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Dockerfile">
+      <option name="closed" value="true" />
+      <created>1747823095682</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1747823095682</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

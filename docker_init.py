@@ -40,6 +40,8 @@ def init_db():
 
         db_con.commit()
         db_con.close()
+        from admin_db import input_data_to_db
+        input_data_to_db()
 
         for i in range(20):
             print("DEFAULT PASSWORD SET TO: ", default_password)
