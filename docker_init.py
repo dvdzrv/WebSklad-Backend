@@ -46,3 +46,14 @@ def init_db():
 
     except sqlite3.OperationalError:
         print("Database already exists.")
+
+
+if __name__ == "__main__":
+    init_db()
+    import uvicorn
+    from main import app
+    from uvicorn import run
+    import multiprocessing
+
+    multiprocessing.freeze_support()
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False, workers=1)

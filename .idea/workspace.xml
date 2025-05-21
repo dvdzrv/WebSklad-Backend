@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Dockerfile">
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_init.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -420,7 +420,7 @@
       <workItem from="1747634042347" duration="108000" />
       <workItem from="1747676517799" duration="568000" />
       <workItem from="1747679304349" duration="3404000" />
-      <workItem from="1747811744539" duration="5256000" />
+      <workItem from="1747811744539" duration="6020000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -758,7 +758,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747821861513</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Dockerfile">
+      <option name="closed" value="true" />
+      <created>1747822243328</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1747822243328</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
