@@ -1,5 +1,8 @@
 FROM python
-ADD ./ .
-RUN pip install python-dotenv uvicorn fastapi requests
+RUN pip install uvicorn fastapi python-dotenv requests
 
-CMD ["python", "./init.py"]
+COPY . .
+
+EXPOSE 8000
+
+CMD ["python", "init.py"]
