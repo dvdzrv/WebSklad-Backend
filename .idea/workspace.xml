@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="fu. vela toho">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+    <list default="true" id="8df974d7-467f-42d2-b1ae-5eea545ea2ea" name="Changes" comment="Dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -421,7 +421,7 @@
       <workItem from="1747634042347" duration="108000" />
       <workItem from="1747676517799" duration="568000" />
       <workItem from="1747679304349" duration="3404000" />
-      <workItem from="1747811744539" duration="1866000" />
+      <workItem from="1747811744539" duration="2032000" />
     </task>
     <task id="LOCAL-00001" summary="initial">
       <option name="closed" value="true" />
@@ -679,7 +679,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747682619693</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Dockerfile">
+      <option name="closed" value="true" />
+      <created>1747813953319</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1747813953319</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -709,7 +717,8 @@
     <MESSAGE value="Nový hoppscotch conf" />
     <MESSAGE value="Oprava z None na NoneType, pridanie requirements.txt, atď" />
     <MESSAGE value="fu. vela toho" />
-    <option name="LAST_COMMIT_MESSAGE" value="fu. vela toho" />
+    <MESSAGE value="Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dockerfile" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/FastAPIProject$FastAPIProject.coverage" NAME="FastAPIProject Coverage Results" MODIFIED="1741606091779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

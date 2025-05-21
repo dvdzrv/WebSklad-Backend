@@ -1,4 +1,2 @@
-FROM fedora/python
-CMD ["dnf", "install", "fastfetch"]
-CMD ["cd /home"]
+FROM fedora
 CMD ["touch test.txt"]
