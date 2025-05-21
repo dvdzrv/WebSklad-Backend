@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 def init_db():
     db_con = sqlite3.connect('db/test.db')
