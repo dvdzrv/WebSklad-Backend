@@ -345,7 +345,6 @@ async def get_image_of_schema(schema_id: int, response: Response):
             "message": str(e),
         }
 
-    print(schema_name[0][0])
     return FileResponse("./db/schemas/" + str(schema_name[0][0]) + ".png")
 
 
