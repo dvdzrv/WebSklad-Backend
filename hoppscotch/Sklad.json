@@ -1,599 +1,650 @@
-[
-  {
-    "v": 7,
-    "name": "Sklad NEW",
-    "requests": [],
-    "auth": {
-      "authType": "none",
-      "authActive": true
+{
+  "_ref_id": "coll_m7xwp94t_bb64374c-febb-45ce-9344-ab795a482941",
+  "auth": {
+    "authActive": true,
+    "authType": "none"
+  },
+  "folders": [
+    {
+      "_ref_id": "coll_m7z6pqfa_b8010ecc-c09b-4be4-a6ef-a5719127f3f8",
+      "auth": {
+        "authActive": true,
+        "authType": "inherit"
+      },
+      "folders": [
+        {
+          "_ref_id": "coll_m7xwr330_8f88f34c-c305-4e9f-a6be-aeef9dc89b32",
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "folders": [],
+          "headers": [],
+          "name": "Listing",
+          "requests": [
+            {
+              "auth": {
+                "authActive": true,
+                "authType": "inherit"
+              },
+              "body": {
+                "body": null,
+                "contentType": null
+              },
+              "endpoint": "http://127.0.0.1:8000/parts/list",
+              "headers": [],
+              "method": "GET",
+              "name": "List all parts",
+              "params": [],
+              "preRequestScript": "",
+              "requestVariables": [],
+              "responses": {},
+              "testScript": "",
+              "v": "12"
+            },
+            {
+              "auth": {
+                "authActive": true,
+                "authType": "inherit"
+              },
+              "body": {
+                "body": null,
+                "contentType": null
+              },
+              "endpoint": "http://127.0.0.1:8000/parts/list/1",
+              "headers": [],
+              "method": "GET",
+              "name": "List part by ID",
+              "params": [],
+              "preRequestScript": "",
+              "requestVariables": [],
+              "responses": {},
+              "testScript": "",
+              "v": "12"
+            },
+            {
+              "auth": {
+                "authActive": true,
+                "authType": "inherit"
+              },
+              "body": {
+                "body": null,
+                "contentType": null
+              },
+              "endpoint": "http://127.0.0.1:8000/parts/list/multiple/1,85,121",
+              "headers": [],
+              "method": "GET",
+              "name": "List parts by IDS",
+              "params": [],
+              "preRequestScript": "",
+              "requestVariables": [],
+              "responses": {},
+              "testScript": "",
+              "v": "12"
+            }
+          ],
+          "v": 6
+        },
+        {
+          "_ref_id": "coll_m7xwre38_259dbc46-e886-42d1-b0e6-0b831fbdaad3",
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "folders": [],
+          "headers": [],
+          "name": "Searching",
+          "requests": [
+            {
+              "auth": {
+                "authActive": true,
+                "authType": "inherit"
+              },
+              "body": {
+                "body": null,
+                "contentType": null
+              },
+              "endpoint": "http://127.0.0.1:8000/parts/search/rezistor",
+              "headers": [],
+              "method": "GET",
+              "name": "Search parts by name",
+              "params": [],
+              "preRequestScript": "",
+              "requestVariables": [],
+              "responses": {},
+              "testScript": "",
+              "v": "12"
+            },
+            {
+              "auth": {
+                "authActive": true,
+                "authType": "inherit"
+              },
+              "body": {
+                "body": null,
+                "contentType": null
+              },
+              "endpoint": "http://127.0.0.1:8000/parts/search/rezistor",
+              "headers": [],
+              "method": "GET",
+              "name": "Search parts by category",
+              "params": [],
+              "preRequestScript": "",
+              "requestVariables": [],
+              "responses": {},
+              "testScript": "",
+              "v": "12"
+            },
+            {
+              "auth": {
+                "authActive": true,
+                "authType": "inherit"
+              },
+              "body": {
+                "body": null,
+                "contentType": null
+              },
+              "endpoint": "http://127.0.0.1:8000/parts/search/rezistor",
+              "headers": [],
+              "method": "GET",
+              "name": "Search parts by subcategory",
+              "params": [],
+              "preRequestScript": "",
+              "requestVariables": [],
+              "responses": {},
+              "testScript": "",
+              "v": "12"
+            }
+          ],
+          "v": 6
+        }
+      ],
+      "headers": [],
+      "name": "Parts",
+      "requests": [
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": "{\n  \"category\" : \"Pasívna\",\n  \"sub_category\" : \"test\",\n  \"name\" : \"test\",\n  \"value\" : \"10k\",\n  \"count\" : 109  \n}",
+            "contentType": "application/json"
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/create",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "POST",
+          "name": "Create part",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/delete/1,2,3",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "DELETE",
+          "name": "Delete parts by IDS",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": "{\n    \"category\": \"Aktívna\",\n    \"sub_category\": \"test\",\n    \"name\": \"test\",\n    \"value\": \"0\",\n    \"count\": 10,\n    \"min_count\": 10\n}",
+            "contentType": "application/json"
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/update/1",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "PUT",
+          "name": "Update part by ID",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/image/7",
+          "headers": [],
+          "method": "GET",
+          "name": "Get img by ID",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        }
+      ],
+      "v": 6
     },
-    "headers": [],
-    "_ref_id": "coll_m7xwp94t_bb64374c-febb-45ce-9344-ab795a482941",
-    "folders": [
-      {
-        "v": 6,
-        "name": "Parts",
-        "requests": [
-          {
-            "v": "12",
-            "name": "Create part",
-            "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/parts/create",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": "application/json",
-              "body": "{\n  \"category\" : \"Pasívna\",\n  \"sub_category\" : \"test\",\n  \"name\" : \"test\",\n  \"value\" : \"10k\",\n  \"count\" : 109  \n}"
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "name": "Delete parts by IDS",
-            "method": "DELETE",
-            "endpoint": "http://127.0.0.1:8000/parts/delete/1,2,3",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "name": "Update part by ID",
-            "method": "PUT",
-            "endpoint": "http://127.0.0.1:8000/parts/update/1",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": "application/json",
-              "body": "{\n    \"category\": \"Aktívna\",\n    \"sub_category\": \"test\",\n    \"name\": \"test\",\n    \"value\": \"0\",\n    \"count\": 10,\n    \"min_count\": 10\n}"
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "name": "Get img by ID",
-            "method": "GET",
-            "endpoint": "http://127.0.0.1:8000/image/7",
-            "params": [],
-            "headers": [],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          }
-        ],
-        "auth": {
-          "authType": "inherit",
-          "authActive": true
-        },
-        "headers": [],
-        "_ref_id": "coll_m7z6pqfa_b8010ecc-c09b-4be4-a6ef-a5719127f3f8",
-        "folders": [
-          {
-            "v": 6,
-            "name": "Listing",
-            "requests": [
-              {
-                "v": "12",
-                "name": "List all parts",
-                "method": "GET",
-                "endpoint": "http://127.0.0.1:8000/parts/list",
-                "params": [],
-                "headers": [],
-                "preRequestScript": "",
-                "testScript": "",
-                "auth": {
-                  "authType": "inherit",
-                  "authActive": true
-                },
-                "body": {
-                  "contentType": null,
-                  "body": null
-                },
-                "requestVariables": [],
-                "responses": {}
-              },
-              {
-                "v": "12",
-                "name": "List part by ID",
-                "method": "GET",
-                "endpoint": "http://127.0.0.1:8000/parts/list/1",
-                "params": [],
-                "headers": [],
-                "preRequestScript": "",
-                "testScript": "",
-                "auth": {
-                  "authType": "inherit",
-                  "authActive": true
-                },
-                "body": {
-                  "contentType": null,
-                  "body": null
-                },
-                "requestVariables": [],
-                "responses": {}
-              },
-              {
-                "v": "12",
-                "name": "List parts by IDS",
-                "method": "GET",
-                "endpoint": "http://127.0.0.1:8000/parts/list/multiple/1,85,121",
-                "params": [],
-                "headers": [],
-                "preRequestScript": "",
-                "testScript": "",
-                "auth": {
-                  "authType": "inherit",
-                  "authActive": true
-                },
-                "body": {
-                  "contentType": null,
-                  "body": null
-                },
-                "requestVariables": [],
-                "responses": {}
-              }
-            ],
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "headers": [],
-            "_ref_id": "coll_m7xwr330_8f88f34c-c305-4e9f-a6be-aeef9dc89b32",
-            "folders": []
-          },
-          {
-            "v": 6,
-            "name": "Searching",
-            "requests": [
-              {
-                "v": "12",
-                "name": "Search parts by name",
-                "method": "GET",
-                "endpoint": "http://127.0.0.1:8000/parts/search/rezistor",
-                "params": [],
-                "headers": [],
-                "preRequestScript": "",
-                "testScript": "",
-                "auth": {
-                  "authType": "inherit",
-                  "authActive": true
-                },
-                "body": {
-                  "contentType": null,
-                  "body": null
-                },
-                "requestVariables": [],
-                "responses": {}
-              },
-              {
-                "v": "12",
-                "name": "Search parts by category",
-                "method": "GET",
-                "endpoint": "http://127.0.0.1:8000/parts/search/rezistor",
-                "params": [],
-                "headers": [],
-                "preRequestScript": "",
-                "testScript": "",
-                "auth": {
-                  "authType": "inherit",
-                  "authActive": true
-                },
-                "body": {
-                  "contentType": null,
-                  "body": null
-                },
-                "requestVariables": [],
-                "responses": {}
-              },
-              {
-                "v": "12",
-                "name": "Search parts by subcategory",
-                "method": "GET",
-                "endpoint": "http://127.0.0.1:8000/parts/search/rezistor",
-                "params": [],
-                "headers": [],
-                "preRequestScript": "",
-                "testScript": "",
-                "auth": {
-                  "authType": "inherit",
-                  "authActive": true
-                },
-                "body": {
-                  "contentType": null,
-                  "body": null
-                },
-                "requestVariables": [],
-                "responses": {}
-              }
-            ],
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "headers": [],
-            "_ref_id": "coll_m7xwre38_259dbc46-e886-42d1-b0e6-0b831fbdaad3",
-            "folders": []
-          }
-        ]
+    {
+      "_ref_id": "coll_m7z6qgxt_73191b49-6fb0-4130-8158-59b7817e4e4b",
+      "auth": {
+        "authActive": true,
+        "authType": "inherit"
       },
-      {
-        "v": 6,
-        "name": "Borrowing",
-        "requests": [
-          {
-            "v": "12",
-            "name": "List borrowed parts",
-            "method": "GET",
-            "endpoint": "http://127.0.0.1:8000/parts/borrowed/list",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "94c9626fb5db4760ad761453ad1ed627",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
+      "folders": [],
+      "headers": [],
+      "name": "Borrowing",
+      "requests": [
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
           },
-          {
-            "v": "12",
-            "name": "List borrowed parts by IDS",
-            "method": "GET",
-            "endpoint": "http://127.0.0.1:8000/parts/borrowed/list/1,2",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "94c9626fb5db4760ad761453ad1ed627",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
+          "body": {
+            "body": null,
+            "contentType": null
           },
-          {
-            "v": "12",
-            "name": "Borrow parts",
-            "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/parts/borrow/3,1,2/5,6,1",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "name": "Return parts",
-            "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/parts/return/1,2",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "name": "Delete borrowed parts",
-            "method": "DELETE",
-            "endpoint": "http://127.0.0.1:8000/parts/borrowed/delete/1,2,3,4",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          }
-        ],
-        "auth": {
-          "authType": "inherit",
-          "authActive": true
+          "endpoint": "http://127.0.0.1:8000/parts/borrowed/list",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "94c9626fb5db4760ad761453ad1ed627"
+            }
+          ],
+          "method": "GET",
+          "name": "List borrowed parts",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
         },
-        "headers": [],
-        "_ref_id": "coll_m7z6qgxt_73191b49-6fb0-4130-8158-59b7817e4e4b",
-        "folders": []
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/borrowed/list/1,2",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "94c9626fb5db4760ad761453ad1ed627"
+            }
+          ],
+          "method": "GET",
+          "name": "List borrowed parts by IDS",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/borrow/3,1,2/5,6,1",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "POST",
+          "name": "Borrow parts",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/return/1,2",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "POST",
+          "name": "Return parts",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/parts/borrowed/delete/1,2,3,4",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "DELETE",
+          "name": "Delete borrowed parts",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        }
+      ],
+      "v": 6
+    },
+    {
+      "_ref_id": "coll_m80t4axq_2bc8b493-fa3d-41b5-8d93-6d2dda12fbca",
+      "auth": {
+        "authActive": true,
+        "authType": "inherit"
       },
-      {
-        "v": 6,
-        "name": "User",
-        "requests": [
-          {
-            "v": "12",
-            "name": "Login",
-            "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/login",
-            "params": [],
-            "headers": [
-              {
-                "key": "Accept",
-                "value": "application/json",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": "application/json",
-              "body": "{\n  \"username\": \"admin\",\n  \"password\": \"heslo\"\n}"
-            },
-            "requestVariables": [],
-            "responses": {}
+      "folders": [],
+      "headers": [],
+      "name": "User",
+      "requests": [
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
           },
-          {
-            "v": "12",
-            "name": "Logout",
-            "method": "POST",
-            "endpoint": "http://127.0.0.1:8000/logout",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "2df97d017552412c9c54a41cd7f441ea",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
+          "body": {
+            "body": "{\n  \"username\": \"admin\",\n  \"password\": \"heslo\"\n}",
+            "contentType": "application/json"
           },
-          {
-            "v": "12",
-            "name": "List history",
-            "method": "GET",
-            "endpoint": "http://127.0.0.1:8000/history",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "c442a20f79104afd9ec50891a8821127",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "preRequestScript": "",
-            "testScript": "",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "endpoint": "http://127.0.0.1:8000/user/list/1,2,3,4",
-            "name": "List user",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "c442a20f79104afd9ec50891a8821127",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "preRequestScript": "",
-            "testScript": "",
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "endpoint": "http://127.0.0.1:8000/user/delete/4",
-            "name": "Delete user",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "c442a20f79104afd9ec50891a8821127",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "preRequestScript": "",
-            "testScript": "",
-            "body": {
-              "contentType": null,
-              "body": null
-            },
-            "requestVariables": [],
-            "responses": {}
-          },
-          {
-            "v": "12",
-            "endpoint": "http://127.0.0.1:8000/user/create",
-            "name": "Create user",
-            "params": [],
-            "headers": [
-              {
-                "key": "token",
-                "value": "c442a20f79104afd9ec50891a8821127",
-                "active": true,
-                "description": ""
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "authType": "inherit",
-              "authActive": true
-            },
-            "preRequestScript": "",
-            "testScript": "",
-            "body": {
-              "contentType": "application/json",
-              "body": "{\n  \"username\" : \"Jano\",\n  \"password\" : \"piťo\",\n  \"rights\" : \"all\"\n}"
-            },
-            "requestVariables": [],
-            "responses": {}
-          }
-        ],
-        "auth": {
-          "authType": "inherit",
-          "authActive": true
+          "endpoint": "http://127.0.0.1:8000/login",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "Accept",
+              "value": "application/json"
+            }
+          ],
+          "method": "POST",
+          "name": "Login",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
         },
-        "headers": [],
-        "_ref_id": "coll_m80t4axq_2bc8b493-fa3d-41b5-8d93-6d2dda12fbca",
-        "folders": []
-      }
-    ]
-  }
-]
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/logout",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "2df97d017552412c9c54a41cd7f441ea"
+            }
+          ],
+          "method": "POST",
+          "name": "Logout",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/history",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "c442a20f79104afd9ec50891a8821127"
+            }
+          ],
+          "method": "GET",
+          "name": "List history",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/user/list/1,2,3,4",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "c442a20f79104afd9ec50891a8821127"
+            }
+          ],
+          "method": "GET",
+          "name": "List user",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": null,
+            "contentType": null
+          },
+          "endpoint": "http://127.0.0.1:8000/user/delete/4",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "c442a20f79104afd9ec50891a8821127"
+            }
+          ],
+          "method": "DELETE",
+          "name": "Delete user",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        },
+        {
+          "auth": {
+            "authActive": true,
+            "authType": "inherit"
+          },
+          "body": {
+            "body": "{\n  \"username\" : \"Jano\",\n  \"password\" : \"piťo\",\n  \"rights\" : \"all\"\n}",
+            "contentType": "application/json"
+          },
+          "endpoint": "http://127.0.0.1:8000/user/create",
+          "headers": [
+            {
+              "active": true,
+              "description": "",
+              "key": "token",
+              "value": "c442a20f79104afd9ec50891a8821127"
+            }
+          ],
+          "method": "POST",
+          "name": "Create user",
+          "params": [],
+          "preRequestScript": "",
+          "requestVariables": [],
+          "responses": {},
+          "testScript": "",
+          "v": "12"
+        }
+      ],
+      "v": 6
+    },
+    {
+      "_ref_id": "coll_mb3iqegn_a317f7ec-6f02-4678-981c-70cf21bdfa11",
+      "auth": {
+        "authActive": true,
+        "authType": "inherit"
+      },
+      "folders": [],
+      "headers": [],
+      "name": "Schemas",
+      "requests": [
+        {
+          "v": "12",
+          "name": "List schemas",
+          "method": "GET",
+          "endpoint": "http://127.0.0.1:8000/schemas",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "12",
+          "endpoint": "http://127.0.0.1:8000/schema/image/2",
+          "name": "Get schema image",
+          "params": [],
+          "headers": [],
+          "method": "GET",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "preRequestScript": "",
+          "testScript": "",
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "v": 7
+    }
+  ],
+  "headers": [],
+  "name": "Sklad NEW",
+  "requests": [],
+  "v": 7
+}
