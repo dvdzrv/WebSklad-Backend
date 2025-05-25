@@ -334,6 +334,20 @@ async def list_schemas():
     from admin_db import construct_schema_list, query_db
     return construct_schema_list(query_db("""SELECT * FROM schemas"""))
 
+@app.get("/schema/image/{schema_id}")
+async def get_image_of_schema(schema_id: int, response: Response):
+    from admin_db import query_db
+    try:
+        schema_name = query_db(f"SELECT schema_name FROM schemas WHERE schema_id = '{schema_id}'")
+    except Exception as e:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {
+            "message": str(e),
+        }
+
+    print(schema_name[0][0])
+    return FileResponse("./db/schemas/" + str(schema_name[0][0]) + ".png")
+
 
 #TODO LIMITED COUNT/MIN COUNT - vyberie ale upozorní
 
