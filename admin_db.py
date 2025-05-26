@@ -168,6 +168,17 @@ def init_db():
            );"""
     )
 
+    db_cursor.execute(
+        """INSERT INTO schemas
+         (
+         schema_name, part_ids, part_counts, schema_description)
+          VALUES
+        ('Obvod', '1,2,3,4', '5,2,4,2', 'Obvod jednoduchý'),
+        ('Blikač', '4,3,22,11', '5,2,4,2', 'Blikač jednoduchý'),
+        """
+    )
+
+
     db_con.commit()
     db_con.close()
 
