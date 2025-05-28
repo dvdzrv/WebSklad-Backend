@@ -1,4 +1,3 @@
-ID,Kategória,Podkategória,Názov,Hodnota,Počet,Limitný počet,Popis,QR
 1,Pasívne súčiastky,,Rezistor,"0,22R",39,,,
 2,Pasívne súčiastky,,Rezistor,"0,33R",32,,,
 3,Pasívne súčiastky,,Rezistor,"0,47R",47,,,
@@ -187,9 +186,6 @@ ID,Kategória,Podkategória,Názov,Hodnota,Počet,Limitný počet,Popis,QR
 186,Pasívne súčiastky,,Objímka štandart ,2x9,26,,,
 187,Pasívne súčiastky,,Objímka štandart ,2x8,90,,,
 188,Pasívne súčiastky,,Kondenzátor univerzálny,30V,50,,,
-189,Aktívne súčiastky,,"
- 	
-Stabilizátor","1,2-37V",13,,,
 190,Aktívne súčiastky,,Komparátor,200ms,49,,,
 191,Pasívne súčiastky,,Objímka DIL,2x20,6,,,
 192,Aktívne súčiastky,,Prevodník PreLed,,6,,,

@@ -174,7 +174,7 @@ def init_db():
          schema_name, part_ids, part_counts, schema_description)
           VALUES
         ('Obvod', '1,2,3,4', '5,2,4,2', 'Obvod jednoduchý'),
-        ('Blikač', '4,3,22,11', '5,2,4,2', 'Blikač jednoduchý'),
+        ('Blikač', '4,3,22,11', '5,2,4,2', 'Blikač jednoduchý');
         """
     )
 
@@ -495,10 +495,7 @@ if __name__ == "__main__":
                         print(e)
 
                 case "I":
-                    try:
-                        init_db()
-                    except Exception as e:
-                        print(e)
+                    init_db()
 
                 case "R":
                     try:
@@ -513,10 +510,7 @@ if __name__ == "__main__":
                             print(e)
 
                 case "C":
-                        try:
-                            input_data_to_db()
-                        except Exception as e:
-                            print(e)
+                        input_data_to_db()
 
         case "L":
             print(parts_list_all())
