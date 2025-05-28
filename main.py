@@ -182,7 +182,6 @@ async def parts_update(part_ids: str, counts: str, response: Response, token: An
 
     if authenticate_user(token, rights):
         messages = parts_borrow(part_ids, counts, token)
-
         if messages:
             response.status_code = status.HTTP_207_MULTI_STATUS
             history_add_operation(token, f"User tried borrowing parts {part_ids}, {messages}.")

@@ -111,8 +111,8 @@ def users_delete_by_ids(user_ids:str):
 #GET USER ID FROM TOKEN
 def get_user_id_by_token(token:str):
     user_id = query_db(
-        f"""SELECT user_id FROM logon_users WHERE token='{token}';"""
-    )[0][0]
+            f"""SELECT user_id FROM logon_users WHERE token='{token}';"""
+        )[0][0]
 
     user_id = str(user_id)
 
@@ -199,7 +199,6 @@ def delete_expired_tokens():
     for token in tokens:
         token_init_time = datetime.datetime.strptime(token[1], "%Y-%m-%d %H:%M:%S")
         if now - token_init_time - datetime.timedelta(hours=1) > token_valid_time:
-            history_add_operation(token, f"Deleted expired token.")
             query_db(
                 f"""DELETE FROM logon_users WHERE logon_id='{token[0]}';"""
             )
