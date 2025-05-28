@@ -28,6 +28,7 @@ def query_db(query: str):
 ##PARTS
 ###Construct part dictionary
 def construct_part(row):
+    print(row)
     if not row:
         return None
     return {"part_id": row[0],

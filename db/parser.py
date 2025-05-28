@@ -22,11 +22,12 @@ def parse():
                 for i in range(len(row)):
                     if row[i] == "":
                         row[i] = "NULL"
-                string += f"(NULL, \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", {row[5]}, {row[6]}, {row[7]}),"
+                string += f"(NULL, \"{row[1]}\", \"{row[2]}\", \"{row[3]}\", \"{row[4]}\", {row[5]}, {row[6]}, \"{row[7]}\"),"
                 line_count += 1
         print(f'Processed {line_count} lines.')
 
-    #part_id, category, sub_category, name, value, count, min_count
+    #TABLE ORDER: ID, Category, SubCategory, Name, Value, Count, MinCount, Description, QR
+    #INSERTED DATA: part_id, category, sub_category, name, value, count, min_count, description
 
 
     string = string[:-1]
