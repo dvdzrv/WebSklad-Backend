@@ -28,7 +28,6 @@ def query_db(query: str):
 ##PARTS
 ###Construct part dictionary
 def construct_part(row):
-    print(row)
     if not row:
         return None
     return {"part_id": row[0],
@@ -38,8 +37,9 @@ def construct_part(row):
                  "value": row[4],
                  "count": row[5],
                  "min_count": row[6],
-                 "created": row[7],
-                 "updated": row[8]
+                 "description": row[7],
+                 "created": row[8],
+                 "updated": row[9]
                }
 
 ###Construct list of part dictionaries
