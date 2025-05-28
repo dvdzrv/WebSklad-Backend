@@ -350,14 +350,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Docker.Dockerfile" />
-      <item itemvalue="FastAPI.FastAPIProject" />
-      <item itemvalue="Python.auth" />
-      <item itemvalue="Python.parser" />
-      <item itemvalue="Python.docker_init" />
       <item itemvalue="Python.admin_db" />
+      <item itemvalue="Python.auth" />
+      <item itemvalue="Python.docker_init" />
       <item itemvalue="Python.init" />
+      <item itemvalue="Python.parser" />
       <item itemvalue="Python.test_imgs" />
+      <item itemvalue="FastAPI.FastAPIProject" />
+      <item itemvalue="Docker.Dockerfile" />
     </list>
     <recent_temporary>
       <list>
