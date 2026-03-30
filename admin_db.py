@@ -42,13 +42,11 @@ def construct_part(row):
                  "updated": row[9]
                }
 
-###Construct list of part dictionaries
+###Construct a list of part dictionaries
 def construct_part_list(rows):
     if not rows:
         return []
-    parts = []
-    for row in rows:
-        parts.append(construct_part(row))
+    parts = [construct_part(row) for row in rows]
     return parts
 
 
@@ -64,9 +62,7 @@ def construct_borrowed_part(row):
 
 ###Construct list borrowed part dictionaries
 def construct_borrowed_part_list(rows):
-    parts = []
-    for row in rows:
-        parts.append(construct_borrowed_part(row))
+    parts = [construct_borrowed_part(row) for row in rows]
     return parts
 
 def construct_schema(row):
@@ -79,9 +75,7 @@ def construct_schema(row):
     }
 
 def construct_schema_list(rows):
-    schemas = []
-    for row in rows:
-        schemas.append(construct_schema(row))
+    schemas = [construct_schema(row) for row in rows]
     return schemas
 
 #DB TABLE HANDLING
@@ -207,13 +201,15 @@ def delete_parts():
 
 ###Truncate parts table
 def truncate_parts():
+    # noinspection SqlWithoutWhere
+    #SQLite does not have TRUNCATE
     query_db(
         """DELETE FROM parts"""
     )
 
 
 ##INSERTING INTO TABLES
-###Insert parts from csv into parts table
+###Insert parts from csv into the parts table
 def input_data_to_db():
     from db import parser
     query_db(
@@ -233,9 +229,10 @@ def parts_list_all():
 
 ###List single part by id
 def parts_list_by_id(id):
-    return query_db(
+    parts = query_db(
         f"""SELECT * FROM parts WHERE part_id ={id}"""
     )[0]
+    return parts if not None else []
 
 ###List multiple parts by id
 def parts_list_by_ids(part_ids: str):
@@ -354,7 +351,7 @@ def parts_borrowed_delete_by_ids(part_ids: str):
     return {"message": f"Borrowed parts {part_ids} deleted."}
 
 ###Borrow parts by IDS and COUNTS
-def parts_borrow(part_ids:str, counts:str, token:str):
+def parts_borrow(part_ids:str, counts:str, token:str) -> list[str]:
 
     part_ids = part_ids.split(',')
     part_ids = [int(id) for id in part_ids]
@@ -385,7 +382,7 @@ def parts_borrow(part_ids:str, counts:str, token:str):
 
         part = construct_part(part)
 
-        #CHECK IF THERE IS ENOUGH PARTS
+        #CHECK IF THERE ARE ENOUGH PARTS
         if part["count"] - counts[i] < 0:
             messages += {
                 "message": f"There is not enough of part.",
@@ -410,13 +407,6 @@ def parts_borrow(part_ids:str, counts:str, token:str):
             query_db(f"""INSERT INTO borrowed (borrowed_id, part_id, count, user_id) VALUES (NULL, {part_ids[i]}, {counts[i]}, {get_user_id_by_token(token)})""")
 
     return messages
-
-    #RETURN BORROWED PARTS
-    str = ""
-    for part in part_ids:
-        str += f"{part},"
-    str = str[:-1]
-    return query_db(f"""SELECT part_id, count FROM borrowed WHERE part_id IN ({str})""")
 
 ###Return borrowed parts by IDS of borrowed parts
 def parts_return(borrowed_ids:str):
