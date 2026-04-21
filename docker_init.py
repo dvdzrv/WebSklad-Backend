@@ -45,7 +45,7 @@ if __name__ == "__main__":
 
     from auth import hash_password
 
-    default_password = os.getenv("DEFAULT_PASSWORD")
+    default_password = os.getenv("DEFAULT_PASSWORD", "heslo")
 
     db_cursor.execute(
         f"""INSERT INTO users (user_id, username, hashed_pass, rights) VALUES (NULL, "admin", '{hash_password(default_password)}', "all");"""
@@ -88,8 +88,9 @@ if __name__ == "__main__":
     db_con.commit()
     db_con.close()
 
-    from admin_db import input_data_to_db
+    from admin_db import input_data_to_db, init_db
 
+    init_db()
     input_data_to_db()
 
     import uvicorn

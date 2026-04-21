@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DEFAULT_PASSWORD=${DEFAULT_PASSWORD:-heslo}
+      - TABLE_NAME=${TABLE_NAME:-tabulka}
+    volumes:
+      - ./db:/app/db
+      - ./db/imgs:/app/db/imgs
